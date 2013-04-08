@@ -72,7 +72,7 @@ public class IndeterminateProgressActivity extends SherlockListActivity implemen
         getSupportMenuInflater().inflate(R.menu.refresh, menu);
         MenuItem item = menu.findItem(R.id.refresh_button);
         mRefreshActionItem = (RefreshActionItem)item.getActionView();
-        mRefreshActionItem.setMenuItem(item);
+        mRefreshActionItem.setMenuItemTitle(item.getTitle());
         mRefreshActionItem.setRefreshActionListener(this);
         loadData();
         return true;

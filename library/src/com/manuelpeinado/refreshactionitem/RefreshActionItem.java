@@ -31,7 +31,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.actionbarsherlock.view.MenuItem;
 import com.readystatesoftware.viewbadger.BadgeView;
 
 public class RefreshActionItem extends FrameLayout implements OnClickListener, OnLongClickListener {
@@ -52,11 +51,11 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     private int mProgress;
     private int mDisplayMode = BUTTON;
     private RefreshActionListener mRefreshButtonListener;
-    private MenuItem mMenuItem;
     private BadgeView mBadge;
     private int mBadgeBackgroundColor = -1;
     private int mBadgeTextStyle;
     private int mBadgePosition;
+    private CharSequence mMenuItemTitle;
     
     public interface RefreshActionListener {
         void onRefreshButtonClick(RefreshActionItem sender);
@@ -121,8 +120,8 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
         this.mRefreshButtonListener = listener;
     }
     
-    public void setMenuItem(MenuItem menuItem) {
-        this.mMenuItem = menuItem;
+    public void setMenuItemTitle(CharSequence title) {
+        this.mMenuItemTitle = title;
     }
     
     /**
@@ -335,7 +334,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     
     @Override
     public boolean onLongClick(View v) {
-        if (mMenuItem == null || TextUtils.isEmpty(mMenuItem.getTitle())) {
+        if (mMenuItemTitle == null || TextUtils.isEmpty(mMenuItemTitle)) {
             return true;
         }
         final int[] screenPos = new int[2];
@@ -347,7 +346,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
         final int height = getHeight();
         final int midy = screenPos[1] + height / 2;
         final int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
-        Toast cheatSheet = Toast.makeText(context, mMenuItem.getTitle(), Toast.LENGTH_SHORT);
+        Toast cheatSheet = Toast.makeText(context, mMenuItemTitle, Toast.LENGTH_SHORT);
         if (midy < displayFrame.height()) {
             cheatSheet.setGravity(Gravity.TOP | Gravity.RIGHT,
                                   screenWidth - screenPos[0] - width / 2, height);

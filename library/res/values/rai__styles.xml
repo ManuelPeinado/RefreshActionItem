@@ -1,7 +1,10 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <style name="Widget">
+    </style>
+    
     <style name="Widget.RefreshActionItem">
-        <item name="refreshActionItemBackground">?attr/actionBarItemBackground</item>
+        <item name="refreshActionItemBackground">?attr/android:actionBarItemBackground</item>
         <item name="badgeBackgroundColor">#CF00</item>
         <item name="badgeTextAppearance">@style/Widget.RefreshActionItem.TextAppearance</item>
         <item name="badgePosition">topRight</item>

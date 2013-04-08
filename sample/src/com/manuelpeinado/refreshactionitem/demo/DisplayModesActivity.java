@@ -47,7 +47,7 @@ public class DisplayModesActivity extends SherlockActivity {
         getSupportMenuInflater().inflate(R.menu.refresh, menu);
         MenuItem item = menu.findItem(R.id.refresh_button);
         mRefreshActionItem = (RefreshActionItem)item.getActionView();
-        mRefreshActionItem.setMenuItem(item);
+        mRefreshActionItem.setMenuItemTitle(item.getTitle());
         return true;
     }
     

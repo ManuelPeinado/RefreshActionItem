@@ -78,7 +78,7 @@ public class StyledActivity extends SherlockListActivity implements RefreshActio
         getSupportMenuInflater().inflate(R.menu.save, menu);
         MenuItem item = menu.findItem(R.id.save_button);
         mSaveButton = (RefreshActionItem) item.getActionView();
-        mSaveButton.setMenuItem(item);
+        mSaveButton.setMenuItemTitle(item.getTitle());
         mSaveButton.setMax(100);
         mSaveButton.setRefreshActionListener(this);
         String[] items = generateRandomItemList();

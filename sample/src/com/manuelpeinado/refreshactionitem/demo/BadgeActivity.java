@@ -79,7 +79,7 @@ public class BadgeActivity extends SherlockListActivity implements RefreshAction
         getSupportMenuInflater().inflate(R.menu.refresh, menu);
         MenuItem item = menu.findItem(R.id.refresh_button);
         mRefreshActionItem = (RefreshActionItem) item.getActionView();
-        mRefreshActionItem.setMenuItem(item);
+        mRefreshActionItem.setMenuItemTitle(item.getTitle());
         mRefreshActionItem.setMax(100);
         mRefreshActionItem.setRefreshActionListener(this);
         loadData();
