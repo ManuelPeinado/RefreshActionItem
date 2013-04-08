@@ -33,14 +33,14 @@
             android:label="@string/activity_title_indeterminate_progress" />
         <activity
             android:name=".NoButtonActivity"
-            android:label="@string/activity_title_indeterminate_progress" />
+            android:label="@string/activity_title_no_button" />
         <activity
             android:name=".StyledActivity"
             android:label="@string/activity_title_styled"
             android:theme="@style/AppTheme.Light.Styled" />
         <activity
             android:name=".BadgeActivity"
-            android:label="@string/activity_title_indeterminate_progress" />
+            android:label="@string/activity_title_badge" />
     </application>
 
 </manifest>
