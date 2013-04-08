@@ -73,7 +73,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     @SuppressWarnings("deprecation")
     public RefreshActionItem(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs);
-        LayoutInflater.from(context).inflate(R.layout.rai__view_refresh_action_item, this);
+        LayoutInflater.from(context).inflate(R.layout.rai__action_item, this);
         mRefreshButton = (ImageView)findViewById(R.id.refresh_button);
         mRefreshButton.setOnClickListener(this);
         mRefreshButton.setOnLongClickListener(this);
