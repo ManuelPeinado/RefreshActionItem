@@ -37,13 +37,13 @@ public class NoButtonActivity extends SherlockListActivity {
         mRefreshActionItem = (RefreshActionItem) item.getActionView();
         mRefreshActionItem.setMenuItem(item);
         mRefreshActionItem.setMax(100);
-        mRefreshActionItem.setDisplayMode(RefreshActionItem.MODE_GONE);
+        mRefreshActionItem.setDisplayMode(RefreshActionItem.GONE);
         load(null);
         return true;
     }
 
     public void load(View view) {
-        mRefreshActionItem.setDisplayMode(RefreshActionItem.MODE_DETERMINATE, true);
+        mRefreshActionItem.setDisplayMode(RefreshActionItem.DETERMINATE, true);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -57,21 +57,20 @@ public class NoButtonActivity extends SherlockListActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mRefreshActionItem.setDisplayMode(RefreshActionItem.MODE_GONE);
+                        mRefreshActionItem.setDisplayMode(RefreshActionItem.GONE);
                         String[] items = generateRandomItemList();
                         setListAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, items));
                     }
                 });
             }
-
         }).start();
     }
 
     public void setDoughnutStyle(View view) {
-        mRefreshActionItem.setDeterminateIndicatorStyle(RefreshActionItem.STYLE_DOUGHNUT);
+        mRefreshActionItem.setDeterminateIndicatorStyle(RefreshActionItem.DOUGHNUT);
     }
 
     public void setPieStyle(View view) {
-        mRefreshActionItem.setDeterminateIndicatorStyle(RefreshActionItem.STYLE_PIE);
+        mRefreshActionItem.setDeterminateIndicatorStyle(RefreshActionItem.PIE);
     }
 }

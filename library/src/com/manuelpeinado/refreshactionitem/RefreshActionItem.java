@@ -17,23 +17,31 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.MenuItem;
-import com.manuelpeinado.refreshactionitem.R;
+import com.readystatesoftware.viewbadger.BadgeView;
 
 public class RefreshActionItem extends FrameLayout implements OnClickListener, OnLongClickListener {
-    public static final int MODE_BUTTON = 0;
-    public static final int MODE_DETERMINATE = 1;
-    public static final int MODE_INDETERMINATE = 2;
-    public static final int MODE_GONE = 3;
-    public static final int STYLE_DOUGHNUT = ProgressIndicator.STYLE_DOUGHNUT;
-    public static final int STYLE_PIE = ProgressIndicator.STYLE_PIE;
+    
+    // Display modes
+    public static final int BUTTON = 0;
+    public static final int DETERMINATE = 1;
+    public static final int INDETERMINATE = 2;
+    public static final int HIDDEN = 3;
+    // Determinate progress indicator styles
+    public static final int DOUGHNUT = ProgressIndicator.STYLE_DOUGHNUT;
+    public static final int PIE = ProgressIndicator.STYLE_PIE;
+    
     private ImageView mRefreshButton;
     private ProgressBar mProgressIndicatorIndeterminate;
     private ProgressIndicator mProgressIndicatorDeterminate;
     private int mMax = 100;
     private int mProgress;
-    private int mDisplayMode = MODE_BUTTON;
+    private int mDisplayMode = BUTTON;
     private RefreshActionListener mRefreshButtonListener;
     private MenuItem mMenuItem;
+    private BadgeView mBadge;
+    private int mBadgeBackgroundColor = -1;
+    private int mBadgeTextStyle;
+    private int mBadgePosition;
     
     public interface RefreshActionListener {
         void onRefreshButtonClick(RefreshActionItem sender);
@@ -46,7 +54,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     public RefreshActionItem(Context context, AttributeSet attrs) {
         this(context, attrs, R.attr.refreshActionStyle);
     }
-
+    
     @SuppressWarnings("deprecation")
     public RefreshActionItem(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs);
@@ -80,6 +88,15 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
                     Drawable drawable = a.getDrawable(R.styleable.RefreshActionItem_refreshActionItemBackground);
                     mRefreshButton.setBackgroundDrawable(drawable);
                     break;
+                case R.styleable.RefreshActionItem_badgeBackgroundColor:
+                    mBadgeBackgroundColor = a.getColor(R.styleable.RefreshActionItem_badgeBackgroundColor, -1);
+                    break;
+                case R.styleable.RefreshActionItem_badgeTextAppearance:
+                    mBadgeTextStyle = a.getResourceId(R.styleable.RefreshActionItem_badgeTextAppearance, 0);
+                    break;
+                case R.styleable.RefreshActionItem_badgePosition:
+                    mBadgePosition = a.getInt(R.styleable.RefreshActionItem_badgePosition, 0);
+                    break;
             }
         }        
         a.recycle();
@@ -92,21 +109,82 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     public void setMenuItem(MenuItem menuItem) {
         this.mMenuItem = menuItem;
     }
+    
+    /**
+     * Adds an exclamation icon to the refresh button. This is intended to suggest
+     * the user that new data is available.
+     * <p>The badge is only shown in the {@link BUTTON} display mode
+     * <p>If the display mode is not <tt>BUTTON</tt>, nothing is done.
+     * @see #showBadge(String)
+     */
+    public void showBadge() {
+        showBadge("!");
+    }
+
+    /**
+     * Adds a badge icon with a give text to the refresh button. This is intended to suggest
+     * the user that new data is available, including how many items
+     * <p>The badge is only shown in the {@link BUTTON} display mode
+     * <p>If the display mode is not <tt>BUTTON</tt>, nothing is done.
+     * @param text Text that is drawn inside the badge icon
+     * @see #showBadge() 
+     */
+    public void showBadge(String text) {
+        hideBadge();
+        mBadge = new BadgeView(getContext(), mRefreshButton);
+        mBadge.setBadgePosition(mBadgePosition);
+        if (mBadgeTextStyle != 0) {
+            mBadge.setTextAppearance(getContext(), mBadgeTextStyle);
+        }
+        if (mBadgeBackgroundColor != -1) {
+            mBadge.setBadgeBackgroundColor(mBadgeBackgroundColor);
+        }
+        mBadge.setText(text);
+        if (mDisplayMode == BUTTON) {
+            // Otherwise the badge won't be shown until be return to BUTTON mode
+            mBadge.show(true);
+        }
+    }
+    
+    /**
+     * Hides the badge associated to this action item.
+     * <p>If the display mode is not <tt>BUTTON</tt> or the badge is not visible, nothing is done.
+     * @see #showBadge()
+     * @see #showBadge(String) 
+     * @see #isBadgeVisible()
+     */
+    public void hideBadge() {
+        if (mBadge == null) {
+            return;
+        }
+        mBadge.hide(true);
+        mBadge = null;
+    }
+    
+    /**
+     * Returns whether this action item has a visible badge.
+     * @see #showBadge()
+     * @see #showBadge(String) 
+     * @see #hideBadge()
+     */
+    public boolean isBadgeVisible() {
+        return mBadge != null;
+    }
 
     private void updateChildrenVisibility() {
         switch (mDisplayMode) {
-        case MODE_BUTTON:
+        case BUTTON:
             mRefreshButton.setVisibility(View.VISIBLE);
             mProgressIndicatorIndeterminate.setVisibility(View.GONE);
             mProgressIndicatorDeterminate.setVisibility(View.GONE);
             break;
-        case MODE_INDETERMINATE:
+        case INDETERMINATE:
             mRefreshButton.setVisibility(View.GONE);
             mProgressIndicatorIndeterminate.setVisibility(View.VISIBLE);
             mProgressIndicatorDeterminate.setVisibility(View.GONE);
             updateProgressIndicatorValue();
             break;
-        case MODE_DETERMINATE:
+        case DETERMINATE:
             mRefreshButton.setVisibility(View.GONE);
             mProgressIndicatorIndeterminate.setVisibility(View.GONE);
             mProgressIndicatorDeterminate.setVisibility(View.VISIBLE);
@@ -126,9 +204,19 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     /**
      * Change the display mode of this progress bar. Supported modes are "refresh button",
      * "determinate progress" and "indeterminate progress"
-     * @param mode One of {@link RefreshActionItem#MODE_BUTTON}, {@link RefreshActionItem#MODE_DETERMINATE} or {@link RefreshActionItem#MODE_INDETERMINATE}
+     * @param mode One of {@link RefreshActionItem#BUTTON}, {@link RefreshActionItem#DETERMINATE} or {@link RefreshActionItem#INDETERMINATE}
      */
     public void setDisplayMode(int mode, boolean resetProgress) {
+        if (mBadge != null) {
+            if (mode != BUTTON) {
+                // Hide badge temporarily until we return to BUTTON mode 
+                mBadge.hide(false);
+            }
+            else {
+                // If badge was hidden temporarily we restore it back to visible 
+                mBadge.show(false);
+            }
+        }
         if (resetProgress) {
             setProgress(0);
         }
@@ -136,8 +224,8 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
             return;
         }
         mDisplayMode = mode;
-        setVisibility(mode == MODE_GONE ? GONE : VISIBLE);
-        if (mode != MODE_GONE) {
+        setVisibility(mode == HIDDEN ? GONE : VISIBLE);
+        if (mode != HIDDEN) {
             updateChildrenVisibility();
         }
     }
@@ -145,7 +233,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
 
     /**
      * Return the display mode of this progress bar 
-     * @return One of {@link DisplayMode#MODE_BUTTON}, {@link DisplayMode#MODE_DETERMINATE} or {@link DisplayMode#MODE_INDETERMINATE}
+     * @return One of {@link DisplayMode#BUTTON}, {@link DisplayMode#DETERMINATE} or {@link DisplayMode#INDETERMINATE}
      */
     public int getDisplayMode() {
         return mDisplayMode;

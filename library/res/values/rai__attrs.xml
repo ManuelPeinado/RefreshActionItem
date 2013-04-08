@@ -8,6 +8,15 @@
         <attr name="refreshActionItemIcon" format="reference" />
         <attr name="progressIndicatorBackgroundColor" format="color" />
         <attr name="progressIndicatorForegroundColor" format="color" />
+        <attr name="badgeBackgroundColor" format="color" />
+        <attr name="badgeTextAppearance" format="reference" />
+        <attr name="badgePosition">
+            <flag name="topLeft" value="1" />
+            <flag name="topRight" value="2" />
+            <flag name="bottomLeft" value="3" />
+            <flag name="bottomRight" value="4" />
+            <flag name="center" value="5" />
+        </attr>
     </declare-styleable>
 
 </resources>

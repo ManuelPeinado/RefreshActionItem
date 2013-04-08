@@ -34,6 +34,7 @@ public class HomeActivity extends SherlockListActivity {
             new ActivityInfo(DeterminateProgressActivity.class, R.string.activity_title_determinate_progress),
             new ActivityInfo(IndeterminateProgressActivity.class, R.string.activity_title_indeterminate_progress),
             new ActivityInfo(NoButtonActivity.class, R.string.activity_title_no_button),
+            new ActivityInfo(BadgeActivity.class, R.string.activity_title_badge),
             new ActivityInfo(StyledActivity.class, R.string.activity_title_styled));
     
     @Override

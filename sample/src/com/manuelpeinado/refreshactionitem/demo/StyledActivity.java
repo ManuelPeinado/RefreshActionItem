@@ -25,7 +25,7 @@ public class StyledActivity extends SherlockListActivity implements RefreshActio
     }
 
     private void saveData() {
-        mSaveButton.setDisplayMode(RefreshActionItem.MODE_DETERMINATE);
+        mSaveButton.setDisplayMode(RefreshActionItem.DETERMINATE);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -39,7 +39,7 @@ public class StyledActivity extends SherlockListActivity implements RefreshActio
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mSaveButton.setDisplayMode(RefreshActionItem.MODE_BUTTON);
+                        mSaveButton.setDisplayMode(RefreshActionItem.BUTTON);
                         Toast.makeText(getApplicationContext(), "Your data has been saved", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -75,10 +75,19 @@ public class StyledActivity extends SherlockListActivity implements RefreshActio
     }
 
     public void setDoughnutStyle(View view) {
-        mSaveButton.setDeterminateIndicatorStyle(RefreshActionItem.STYLE_DOUGHNUT);
+        mSaveButton.setDeterminateIndicatorStyle(RefreshActionItem.DOUGHNUT);
     }
 
     public void setPieStyle(View view) {
-        mSaveButton.setDeterminateIndicatorStyle(RefreshActionItem.STYLE_PIE);
+        mSaveButton.setDeterminateIndicatorStyle(RefreshActionItem.PIE);
+    }
+    
+    public void showBadge(View view) {
+        if (mSaveButton.isBadgeVisible()) {
+            mSaveButton.hideBadge();
+        }
+        else {
+            mSaveButton.showBadge("5");
+        }
     }
 }

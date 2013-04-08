@@ -24,7 +24,7 @@ public class DeterminateProgressActivity extends SherlockListActivity implements
     }
 
     private void loadData() {
-        mRefreshActionItem.setDisplayMode(RefreshActionItem.MODE_DETERMINATE);
+        mRefreshActionItem.setDisplayMode(RefreshActionItem.DETERMINATE);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -38,7 +38,7 @@ public class DeterminateProgressActivity extends SherlockListActivity implements
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mRefreshActionItem.setDisplayMode(RefreshActionItem.MODE_BUTTON);
+                        mRefreshActionItem.setDisplayMode(RefreshActionItem.BUTTON);
                         String[] items = generateRandomItemList();
                         setListAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, items));
                     }
@@ -74,10 +74,10 @@ public class DeterminateProgressActivity extends SherlockListActivity implements
     }
 
     public void setDoughnutStyle(View view) {
-        mRefreshActionItem.setDeterminateIndicatorStyle(RefreshActionItem.STYLE_DOUGHNUT);
+        mRefreshActionItem.setDeterminateIndicatorStyle(RefreshActionItem.DOUGHNUT);
     }
 
     public void setPieStyle(View view) {
-        mRefreshActionItem.setDeterminateIndicatorStyle(RefreshActionItem.STYLE_PIE);
+        mRefreshActionItem.setDeterminateIndicatorStyle(RefreshActionItem.PIE);
     }
 }

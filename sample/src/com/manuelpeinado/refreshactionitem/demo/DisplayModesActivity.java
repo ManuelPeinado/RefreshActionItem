@@ -35,7 +35,14 @@ public class DisplayModesActivity extends SherlockActivity {
     }
     
     public void showButton(View view) {
-        mRefreshActionItem.setDisplayMode(RefreshActionItem.MODE_BUTTON);
+        if (mRefreshActionItem.isBadgeVisible()) {
+            mRefreshActionItem.hideBadge();
+        }
+        else {
+            mRefreshActionItem.showBadge();
+        }
+
+        mRefreshActionItem.setDisplayMode(RefreshActionItem.BUTTON);
         hideDeterminateButtons();
     }
 
@@ -45,15 +52,14 @@ public class DisplayModesActivity extends SherlockActivity {
     }
 
     public void showIndeterminate(View view) {
-        mRefreshActionItem.setDisplayMode(RefreshActionItem.MODE_INDETERMINATE);
+        mRefreshActionItem.setDisplayMode(RefreshActionItem.INDETERMINATE);
         hideDeterminateButtons();
     }
     
     public void showDeterminate(View view) {
-        mRefreshActionItem.setDisplayMode(RefreshActionItem.MODE_DETERMINATE);
+        mRefreshActionItem.setDisplayMode(RefreshActionItem.DETERMINATE);
         mDeterminateButtons1.setVisibility(View.VISIBLE);
         mDeterminateButtons2.setVisibility(View.VISIBLE);
-
     }
     
     public void incrementProgress(View view) {
@@ -65,10 +71,10 @@ public class DisplayModesActivity extends SherlockActivity {
     }
     
     public void setDoughnutStyle(View view) {
-        mRefreshActionItem.setDeterminateIndicatorStyle(RefreshActionItem.STYLE_DOUGHNUT);
+        mRefreshActionItem.setDeterminateIndicatorStyle(RefreshActionItem.DOUGHNUT);
     }
 
     public void setPieStyle(View view) {
-        mRefreshActionItem.setDeterminateIndicatorStyle(RefreshActionItem.STYLE_PIE);
+        mRefreshActionItem.setDeterminateIndicatorStyle(RefreshActionItem.PIE);
     }
 }
