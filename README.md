@@ -91,8 +91,9 @@ Two values are supported:
 Libraries used
 --------------------
 
-* [ActionBarSherlock][2] by Jake Wharton
-* The sample app uses the [ProviGen library][6] by Timothee Jeannin
+* The library includes some code (mainly XML dimension resources) extracted from the ActionBarSherlock library.
+* Badges are implemented using the android-viewbadger library by Jeff Gilfelt.
+* The sample app uses the ActionBarSherlock library by JakeWharton.
 
 Developed By
 --------------------
@@ -122,7 +123,7 @@ License
 
 
 
- [1]: https://raw.github.com/ManuelPeinado/MultiChoiceAdapter/master/art/readme_pic.png
+ [1]: https://raw.github.com/ManuelPeinado/RefreshActionItem/master/art/readme_pic.png
  [4]: https://play.google.com/store/apps/details?id=com.manuelpeinado.multichoiceadapter.demo
- [5]: https://github.com/ManuelPeinado/MultiChoiceAdapter/tree/master/sample
+ [5]: https://github.com/ManuelPeinado/RefreshActionItem/tree/master/sample
  [6]: https://github.com/TimotheeJeannin/ProviGen
