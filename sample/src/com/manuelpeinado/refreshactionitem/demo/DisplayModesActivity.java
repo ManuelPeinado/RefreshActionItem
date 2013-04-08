@@ -99,8 +99,8 @@ public class DisplayModesActivity extends SherlockActivity {
         mRefreshActionItem.incrementProgressBy(-10);
     }
     
-    public void setDoughnutStyle(View view) {
-        mRefreshActionItem.setDeterminateIndicatorStyle(RefreshActionItem.DOUGHNUT);
+    public void setWheelStyle(View view) {
+        mRefreshActionItem.setDeterminateIndicatorStyle(RefreshActionItem.WHEEL);
     }
 
     public void setPieStyle(View view) {

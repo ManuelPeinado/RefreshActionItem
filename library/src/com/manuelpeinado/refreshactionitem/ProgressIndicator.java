@@ -30,14 +30,14 @@ import android.view.View;
 
 /**
  * Class used internally by {@link RefreshActionItem} to show a determinate progress
- * indicator. Two display modes are supported "doughnut" and "pie" 
+ * indicator. Two display modes are supported "wheel" and "pie" 
  */
 class ProgressIndicator extends View {
     /**
      * Style that shows a hollow indicator, similar to that of the standard
      * indeterminate ProgressBar wheel
      */
-    public static final int STYLE_DOUGHNUT = 0;
+    public static final int STYLE_WHEEL = 0;
     /**
      * Style that shows a pie (pac-man) indicator
      */
@@ -51,7 +51,7 @@ class ProgressIndicator extends View {
     private int mColorForeground = Color.WHITE;
     private int mColorBackground = Color.BLACK;
     private float mValue;
-    private int mStyle = STYLE_DOUGHNUT;
+    private int mStyle = STYLE_WHEEL;
     /**
      * Value which makes our custom drawn indicator have roughly the same size
      * as the built-in ProgressBar indicator. Unit: dp
@@ -84,10 +84,8 @@ class ProgressIndicator extends View {
     }
 
     /**
-     * Set the style of this indicator.The two supported styles are "doughnut"
-     * and "pie"
-     * 
-     * @param style One of {@link STYLE_DOUGHNUT} or {@link STYLE_PIE}
+     * Set the style of this indicator.The two supported styles are "wheel" and "pie"
+     * @param style One of {@link STYLE_WHEEL} or {@link STYLE_PIE}
      */
     public void setStyle(int style) {
         if (mStyle == style) {
@@ -100,7 +98,7 @@ class ProgressIndicator extends View {
     /**
      * Return the current style of this indicator.
      * 
-     * @return One of {@link STYLE_DOUGHNUT} or {@link STYLE_PIE}
+     * @return One of {@link STYLE_WHEEL} or {@link STYLE_PIE}
      */
     public int getStyle() {
         return mStyle;
@@ -163,7 +161,7 @@ class ProgressIndicator extends View {
         }
         float angle = mValue * 360;
         canvas.drawArc(mRect, -90, angle, true, mPaintForeground);
-        if (mStyle == STYLE_DOUGHNUT) {
+        if (mStyle == STYLE_WHEEL) {
             canvas.drawArc(mRectInner, -90, 360, true, mPaintErase);
         }
         postInvalidate();

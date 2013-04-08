@@ -15,17 +15,17 @@
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:checkedButton="@+id/doughnut"
+        android:checkedButton="@+id/wheel"
         android:orientation="horizontal" >
 
         <RadioButton
-            android:id="@+id/doughnut"
+            android:id="@+id/wheel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
-            android:onClick="setDoughnutStyle"
-            android:text="Doughnut" />
+            android:onClick="setWheeltyle"
+            android:text="Wheel" />
 
         <RadioButton
             android:layout_width="0dp"

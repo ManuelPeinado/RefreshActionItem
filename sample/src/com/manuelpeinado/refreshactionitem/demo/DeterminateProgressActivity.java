@@ -101,8 +101,8 @@ public class DeterminateProgressActivity extends SherlockListActivity implements
         loadData();
     }
 
-    public void setDoughnutStyle(View view) {
-        mRefreshActionItem.setDeterminateIndicatorStyle(RefreshActionItem.DOUGHNUT);
+    public void setWheelStyle(View view) {
+        mRefreshActionItem.setDeterminateIndicatorStyle(RefreshActionItem.WHEEL);
     }
 
     public void setPieStyle(View view) {

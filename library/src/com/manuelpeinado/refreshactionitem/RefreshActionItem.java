@@ -39,7 +39,7 @@ import com.readystatesoftware.viewbadger.BadgeView;
  * a progress indicator until the operation ends, at which point the button is restored to
  * its initial state.
  * <p>The progress indicator can be determinate or indeterminate. If the determinate mode is 
- * used, it is possible to choose between two styles: "doughnut" and "pie". 
+ * used, it is possible to choose between two styles: "wheel" and "pie". 
  * <p>It is also possible to have the refresh button be invisible initially, which makes this
  * action item behave like a replacement for the built-in indeterminate action bar progress
  * indicator (with the benefit that with this action item the progress can be determinate).
@@ -54,7 +54,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     public static final int INDETERMINATE = 2;
     public static final int HIDDEN = 3;
     // Determinate progress indicator styles
-    public static final int DOUGHNUT = ProgressIndicator.STYLE_DOUGHNUT;
+    public static final int WHEEL = ProgressIndicator.STYLE_WHEEL;
     public static final int PIE = ProgressIndicator.STYLE_PIE;
     
     private ImageView mRefreshButton;

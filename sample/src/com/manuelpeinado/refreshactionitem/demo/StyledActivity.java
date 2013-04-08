@@ -103,8 +103,8 @@ public class StyledActivity extends SherlockListActivity implements RefreshActio
         saveData();
     }
 
-    public void setDoughnutStyle(View view) {
-        mSaveButton.setDeterminateIndicatorStyle(RefreshActionItem.DOUGHNUT);
+    public void setWheelStyle(View view) {
+        mSaveButton.setDeterminateIndicatorStyle(RefreshActionItem.WHEEL);
     }
 
     public void setPieStyle(View view) {
