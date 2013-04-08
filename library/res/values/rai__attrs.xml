@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="refreshActionStyle" format="reference" />
+
+    <declare-styleable name="RefreshActionItem">
+        <attr name="refreshActionItemBackground" format="reference" />
+        <attr name="refreshActionItemIcon" format="reference" />
+        <attr name="progressIndicatorBackgroundColor" format="color" />
+        <attr name="progressIndicatorForegroundColor" format="color" />
+    </declare-styleable>
+
+</resources>

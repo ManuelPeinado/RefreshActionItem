@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.Sherlock"></style>
+    <style name="AppTheme.Light" parent="Theme.Sherlock.Light"></style>
+    
+    <style name="AppTheme.Light.Styled">
+        <item name="actionBarStyle">@style/Widget.ActionBar.Styled</item>
+        <item name="android:actionBarStyle">@style/Widget.ActionBar.Styled</item>
+        <item name="refreshActionStyle">@style/Widget.RefreshActionItem.Light.Styled</item>
+    </style>
+
+</resources>

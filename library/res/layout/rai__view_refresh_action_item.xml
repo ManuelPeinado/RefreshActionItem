@@ -1,0 +1,26 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/abs__action_bar_default_height"
+    android:layout_height="@dimen/abs__action_bar_default_height" >
+
+    <ImageView
+        android:scaleType="center"
+        android:id="@+id/refresh_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/abs__action_bar_icon_vertical_padding" />
+
+    <ProgressBar
+        android:id="@+id/indeterminate_progress_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:indeterminate="true"
+        android:padding="@dimen/abs__action_bar_icon_vertical_padding" />
+
+    <com.manuelpeinado.refreshactionitem.ProgressIndicator
+        android:id="@+id/determinate_progress_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/abs__action_bar_icon_vertical_padding" />
+
+</FrameLayout>

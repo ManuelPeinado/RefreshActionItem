@@ -1,0 +1,19 @@
+<resources>
+
+    <style name="Widget.RefreshActionItem">
+        <item name="refreshActionItemBackground">?attr/actionBarItemBackground</item>
+    </style>
+
+    <style name="Widget.RefreshActionItem.Light">
+        <item name="progressIndicatorForegroundColor">#9333</item>
+        <item name="progressIndicatorBackgroundColor">#1333</item>
+        <item name="refreshActionItemIcon">@drawable/ic_navigation_refresh_light</item>
+    </style>
+
+    <style name="Widget.RefreshActionItem.Dark">
+        <item name="progressIndicatorForegroundColor">#CFFF</item>
+        <item name="progressIndicatorBackgroundColor">#3FFF</item>
+        <item name="refreshActionItemIcon">@drawable/ic_navigation_refresh_dark</item>
+    </style>
+
+</resources>

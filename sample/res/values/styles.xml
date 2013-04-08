@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.RefreshActionItem.Light.Styled">
+        <item name="refreshActionItemIcon">@drawable/ic_content_save</item>
+    </style>
+
+    <style name="Widget.ActionBar.Styled" parent="Widget.Sherlock.Light.ActionBar.Solid">
+        <item name="android:background">#eec</item>
+        <item name="background">#eec</item>
+    </style>
+
+</resources>
