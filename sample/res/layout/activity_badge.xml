@@ -12,30 +12,33 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <LinearLayout
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:checkedButton="@+id/defaultBadge"
         android:orientation="horizontal" >
 
-        <Button
+        <RadioButton
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:checkedButton="@+id/defaultBadge"
             android:onClick="showDefaultBadge"
             android:text="Default badge" />
 
-        <Button
+        <RadioButton
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="showNumericBadge"
             android:text="Numeric badge" />
-        <Button
+
+        <RadioButton
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="hideBadge"
             android:text="Hide" />
-        </LinearLayout>
+    </RadioGroup>
 
 </LinearLayout>

@@ -2,39 +2,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:orientation="vertical"
-    tools:context=".DisplayModesActivity" 
-    android:animateLayoutChanges="true">
+    tools:context=".DisplayModesActivity" >
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <LinearLayout
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:checkedButton="@+id/button"
         android:orientation="horizontal" >
 
-        <Button
+        <RadioButton
+            android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="showButton"
             android:text="Button" />
 
-        <Button
-            android:layout_width="0dp"
+        <RadioButton
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:onClick="showIndeterminate"
             android:text="Indeterminate" />
 
-        <Button
+        <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="showDeterminate"
             android:text="Determinate" />
-    </LinearLayout>
+    </RadioGroup>
 
     <LinearLayout
         android:id="@+id/determinate_buttons_1"
@@ -57,25 +58,28 @@
             android:text="+" />
     </LinearLayout>
 
-    <LinearLayout
+    <RadioGroup
         android:id="@+id/determinate_buttons_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:checkedButton="@+id/doughnut"
         android:orientation="horizontal" >
 
-        <Button
+        <RadioButton
+            android:id="@+id/doughnut"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:checked="true"
             android:onClick="setDoughnutStyle"
             android:text="Doughnut" />
 
-        <Button
+        <RadioButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="setPieStyle"
             android:text="Pie" />
-    </LinearLayout>
+    </RadioGroup>
 
 </LinearLayout>

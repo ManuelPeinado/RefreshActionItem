@@ -18,24 +18,27 @@
         android:onClick="load"
         android:text="Load" />
 
-    <LinearLayout
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:checkedButton="@+id/doughnut"
         android:orientation="horizontal" >
 
-        <Button
+        <RadioButton
+            android:id="@+id/doughnut"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:checked="true"
             android:onClick="setDoughnutStyle"
             android:text="Doughnut" />
 
-        <Button
+        <RadioButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="setPieStyle"
             android:text="Pie" />
-    </LinearLayout>
+    </RadioGroup>
 
 </LinearLayout>
