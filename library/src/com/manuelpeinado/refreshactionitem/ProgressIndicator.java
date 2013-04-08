@@ -30,7 +30,7 @@ import android.view.View;
 
 /**
  * Class used internally by {@link RefreshActionItem} to show a determinate progress
- * indicator. Two display modes are supported: "doughnut" and "pie" 
+ * indicator. Two display modes are supported "doughnut" and "pie" 
  */
 class ProgressIndicator extends View {
     /**
