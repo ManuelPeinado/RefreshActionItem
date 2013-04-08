@@ -1,5 +1,5 @@
-MultiChoiceAdapter
-==================
+RefreshActionItem
+=================
 
 An action bar item implementing a common pattern: initially a refresh button is shown, and when the button is clicked a background operation begins and the button turns into a progress indicator until the operation ends, at which point the button is restored to its initial state.
 
