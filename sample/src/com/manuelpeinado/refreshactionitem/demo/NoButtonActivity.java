@@ -54,7 +54,7 @@ public class NoButtonActivity extends SherlockListActivity {
         mRefreshActionItem = (RefreshActionItem) item.getActionView();
         mRefreshActionItem.setMenuItemTitle(item.getTitle());
         mRefreshActionItem.setMax(100);
-        mRefreshActionItem.setDisplayMode(RefreshActionItem.GONE);
+        mRefreshActionItem.setDisplayMode(RefreshActionItem.HIDDEN);
         load(null);
         return true;
     }
@@ -86,7 +86,7 @@ public class NoButtonActivity extends SherlockListActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mRefreshActionItem.setDisplayMode(RefreshActionItem.GONE);
+                        mRefreshActionItem.setDisplayMode(RefreshActionItem.HIDDEN);
                         String[] items = generateRandomItemList();
                         setListAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, items));
                     }

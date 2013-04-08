@@ -30,7 +30,6 @@ import com.manuelpeinado.refreshactionitem.demo.R;
 
 public class HomeActivity extends SherlockListActivity {
     private List<ActivityInfo> activitiesInfo = Arrays.asList(
-            new ActivityInfo(DisplayModesActivity.class, R.string.activity_title_basic_usage),
             new ActivityInfo(DeterminateProgressActivity.class, R.string.activity_title_determinate_progress),
             new ActivityInfo(IndeterminateProgressActivity.class, R.string.activity_title_indeterminate_progress),
             new ActivityInfo(NoButtonActivity.class, R.string.activity_title_no_button),

@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
-            android:onClick="setWheeltyle"
+            android:onClick="setWheelStyle"
             android:text="Wheel" />
 
         <RadioButton

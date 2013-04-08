@@ -15,14 +15,13 @@
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:checkedButton="@+id/defaultBadge"
+        android:checkedButton="@+id/hide"
         android:orientation="horizontal" >
 
         <RadioButton
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:checkedButton="@+id/defaultBadge"
             android:onClick="showDefaultBadge"
             android:text="Default badge" />
 
@@ -34,6 +33,7 @@
             android:text="Numeric badge" />
 
         <RadioButton
+            android:id="@+id/hide"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

@@ -23,9 +23,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DisplayModesActivity"
-            android:label="@string/activity_title_basic_usage" />
-        <activity
             android:name=".DeterminateProgressActivity"
             android:label="@string/activity_title_determinate_progress" />
         <activity
