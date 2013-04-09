@@ -28,7 +28,7 @@ Or browse the [source code][3] of the sample application for a complete example 
 Including in your project
 -------------------------
 
-If you’re using Eclipse with the ADT plugin you can include MultiChoiceAdaptar as a library project. Create a new Android project in Eclipse using the library/ folder as the existing source. Then, open the properties of this new project and, in the 'Android' category, add a reference to the ActionBarSherlock library project. Finally, in your application project properties, add a reference to the created library project.
+If you’re using Eclipse with the ADT plugin you can include RefreshActionItem as a library project. Create a new Android project in Eclipse using the library/ folder as the existing source. Then, open the properties of this new project and, in the 'Android' category, add a reference to the ActionBarSherlock library project. Finally, in your application project properties, add a reference to the created library project.
 
 If you use maven to build your Android project you can simply add a dependency for this library.
 
@@ -79,15 +79,16 @@ From your background task, call the action item's <tt>setProgress(int)</tt> meth
     
 Finally, when the background task is complete restore the action item to its original state:
 
-    mRefreshActionItem.setDisplayMode(RefreshActionItem.BUTTON);
+    mRefreshActionItem.showProgress(false);
 
 ### Progress bar styles
 
-By the default the action item shows the amount of progress using a wheel (some  might call it a doughnut). There is an addition style, the "pie", which you can activate by calling <tt>setProgressBarStyle(RefreshActionItem.PIE</tt> on your action item.
+By the default the action item shows the amount of progress using a wheel (or doughnut if you prefer). There is an additional style, the "pie", which you can activate by calling <tt>setProgressBarStyle(RefreshActionItem.PIE</tt> on your action item.
 
-If the progress of your background task cannot be easily measured you might prefer to use an indeterminate progress indicator. To achieve this just call <tt>setProgressBarStyle(RefreshActionItem.INDETERMINATE)</tt> on your action item.
+Also, if the progress of your background task cannot be easily measured you might prefer to use an indeterminate progress indicator. To achieve this just call <tt>setProgressBarStyle(RefreshActionItem.INDETERMINATE)</tt> on your action item.
 
-    
+Progress bar styles can also be specified using XML themes (see the *Customization* section below).
+
 
 ### Badges
 
