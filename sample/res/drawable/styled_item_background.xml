@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2011 The Android Open Source Project
+<!--
+     Copyright (C) 2010 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,10 @@
      limitations under the License.
 -->
 
-<resources>
-    <bool name="abs__action_bar_expanded_action_views_exclusive">false</bool>
-</resources>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Even though these two point to the same resource, have two states so the drawable will invalidate itself when coming out of pressed state. -->
+    <item android:drawable="@color/styled_item_background_color" android:state_pressed="true"/>
+    <item android:drawable="@android:color/transparent"/>
+
+</selector>

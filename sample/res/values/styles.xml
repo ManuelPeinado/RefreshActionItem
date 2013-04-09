@@ -2,6 +2,7 @@
 <resources>
 
     <style name="Widget.RefreshActionItem.Light.Styled">
+        <item name="refreshActionItemBackground">?attr/actionBarItemBackground</item>
         <item name="refreshActionItemIcon">@drawable/ic_content_save</item>
         <item name="refreshActionItemIcon">@drawable/ic_content_save</item>
         <item name="badgeBackgroundColor">#A4F4</item>

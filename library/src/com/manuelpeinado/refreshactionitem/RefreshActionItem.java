@@ -79,7 +79,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     }
 
     public RefreshActionItem(Context context, AttributeSet attrs) {
-        this(context, attrs, R.attr.refreshActionStyle);
+        this(context, attrs, R.attr.refreshActionItemStyle);
     }
     
     @SuppressWarnings("deprecation")

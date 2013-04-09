@@ -1,11 +1,13 @@
 RefreshActionItem
 =================
 
-An action bar item implementing a common pattern: initially a refresh button is shown, and when the button is clicked a background operation begins and the button turns into a progress indicator until the operation ends, at which point the button is restored to its initial state.
+An action bar item implementing the following common pattern: initially a refresh button is shown, and when the button is clicked a background operation begins and the button turns into a progress indicator until the operation ends, at which point the button is restored to its initial state.
 
-The progress indicator can be determinate or indeterminate. If the determinate mode is used, it is possible to choose between two styles: "wheel" and "pie". 
+The progress bar displays how far the operation has processed. It is possible to choose between two styles: "wheel" and "pie". 
 
-It is also possible to have the refresh button be invisible initially, which makes this action item behave like a replacement for the built-in indeterminate action bar progress indicator (with the benefit that with this action item the progress can be determinate).
+The progress bar can also be made indeterminate, just like the built-in <tt>ProgressBar</tt>.
+
+It is also possible to have the refresh button be invisible initially, which makes this action item behave like a replacement for the built-in indeterminate action bar progress indicator.
  
 The action item also supports adding a small badge that indicates that there is new data available.
 
@@ -23,14 +25,14 @@ Or browse the [source code of the sample application][5] for a complete example 
 Including in your project
 -------------------------
 
-If you’re using Eclipse with the ADT plugin you can include MultiChoiceAdaptar as a library project. Create a new Android project in Eclipse using the library/ folder as the existing source. Then, open the properties of this new project and, in the 'Android' category, add a reference to the ActionBarSherlock library project. Finally, in your application project properties, add a reference to the created library project.
+If you’re using Eclipse with the ADT plugin you can include RefreshActionItem as a library project. Just create a new Android project in Eclipse using the library/ folder as the existing source, and add a reference to it to your application project.
 
 If you use maven to build your Android project you can simply add a dependency for this library.
 
     <dependency>
-        <groupId>com.github.manuelpeinado.multichoiceadapter</groupId>
+        <groupId>com.github.manuelpeinado.refreshactionitem</groupId>
         <artifactId>library</artifactId>
-        <version>1.0.6</version>
+        <version>1.0.3</version>
         <type>apklib</type>
     </dependency>
 
