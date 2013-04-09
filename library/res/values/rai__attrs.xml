@@ -8,6 +8,11 @@
         <attr name="refreshActionItemIcon" format="reference" />
         <attr name="progressIndicatorBackgroundColor" format="color" />
         <attr name="progressIndicatorForegroundColor" format="color" />
+        <attr name="progressIndicatorStyle">
+            <flag name="wheel" value="0" />
+            <flag name="pie" value="1" />
+            <flag name="indeterminate" value="2" />
+        </attr>
         <attr name="badgeBackgroundColor" format="color" />
         <attr name="badgeTextAppearance" format="reference" />
         <attr name="badgePosition">

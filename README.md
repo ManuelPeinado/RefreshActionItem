@@ -1,19 +1,17 @@
 RefreshActionItem
 =================
 
-An action item for [ActionBarSherlock][1] that implements the following common pattern: 
+An action bar item that implements this common pattern:
 
-* Initially a refresh button is shown.
-* When the button is clicked, a background operation begins and the button turns into a progress indicator.
+* Initially it shows a refresh button.
+* If the button is clicked, a background operation begins and the button turns into a progress indicator.
 * When the background operation ends, the button is restored to its initial state.
 
-The progress bar displays how far the operation has proceeded. It is possible to choose between two styles: "wheel" and "pie". 
-
-The progress bar can also be made indeterminate, just like the built-in <tt>ProgressBar</tt>.
-
-The refresh button can be made initially invisible, which makes this action item behave like a replacement for the built-in indeterminate action bar progress indicator.
+The progress bar shows a magnitude which represents how far the operation has proceeded. The progress bar can also be made indeterminate, just like the built-in <tt>ProgressBar</tt>.
  
-The action item also supports adding a small badge that indicates that there is new data available.
+It is possible to add a small badge to the action item. This tells the user that there is new data available.
+
+This library requires [ActionBarSherlock][1], and is thus compatible with Android 2.x and newer.
 
 ![Example Image][2]
 
@@ -66,12 +64,12 @@ Then, configure the action in the <tt>onCreateOptionsMenu</tt> method of your <t
         return true;
     }
 
-The <tt>setRefreshActionListener</tt> method registers a callback that will be invoked when the refresh button is clicked. Start your background process from this callback and change the display mode of the action item so that it shows a progress indicator:
+The <tt>setRefreshActionListener</tt> method registers a callback that will be invoked when the refresh button is clicked. Start your background process from this callback and invoke <tt>showProgress(true)</tt> on the action item so that it turns into a progress indicator:
 
 
     @Override
     public void onRefreshButtonClick(RefreshActionItem sender) {
-        mRefreshActionItem.setDisplayMode(RefreshActionItem.PROGRESS);
+        mRefreshActionItem.showProgress(true);
         startBackgroundTask();
     }
 
@@ -79,11 +77,17 @@ From your background task, call the action item's <tt>setProgress(int)</tt> meth
 
     mRefreshActionItem.setProgress(progress);
     
-If the progress of your background task cannot be easily measured you might prefer to use an indeterminate progress indicator. Just pass <tt>RefreshActionItem.INDETERMINATE</tt> to <tt>setDisplayMode()</tt>.
-
 Finally, when the background task is complete restore the action item to its original state:
 
     mRefreshActionItem.setDisplayMode(RefreshActionItem.BUTTON);
+
+### Progress bar styles
+
+By the default the action item shows the amount of progress using a wheel (some  might call it a doughnut). There is an addition style, the "pie", which you can activate by calling <tt>setProgressBarStyle(RefreshActionItem.PIE</tt> on your action item.
+
+If the progress of your background task cannot be easily measured you might prefer to use an indeterminate progress indicator. To achieve this just call <tt>setProgressBarStyle(RefreshActionItem.INDETERMINATE)</tt> on your action item.
+
+    
 
 ### Badges
 
@@ -93,39 +97,21 @@ Sometimes it is useful to give the user a visual hint suggesting that there is n
 
 The badge shows an exclamation mark by default, but you can specify an alternative text if you desire.
 
-### Hidden mode
-
-If the data refresh cycle of your application is controlled internally and not directly by the user, it might not make sense to show a refresh action in your action bar. This won't prevent you from using the library, though: just set the display mode <tt>RefreshActionItem.HIDDEN</tt> in <tt>onCreateOptionsMenu()</tt>.
 
 Customization
 ---------------------
+There are two ways you can customize the appearance of your action item:
 
-You can use a **custom background** (drawable or color) for the selected items of your list. To do so, add an item named <code>multiChoiceAdapterStyle</code> to your theme, and have it reference an additional style which you define like this:
+ 1. **Theme XML**. Define a <tt>refreshActionItemStyle</tt> attribute in your theme and make it reference a custom style where you can customize any of the multiple attributes supported by the library.
+ 2. **Object methods**. Use the getters and setters methods provided by the library directly from your Java code.
 
-    <style name="MyCustomMultiChoiceAdapter">
-        <item name="selectedItemBackground">@color/my_custom_selected_item_background</item>
-    </style>
-
-See the sample application for a complete example.
-
-You can also customize the way the adapter behaves when an item is clicked and **the action mode was already active**. Just add the following item to your style:
-
-    <style name="MyCustomMultiChoiceAdapter">
-        <item name="itemClickInActionMode">selectItem</item>
-    </style>
-    
-Two values are supported:
-
-* <tt>selectItem</tt>. Changes the selection state of the clicked item, just as if it had been long clicked. This is what the native MULTICHOICE_MODAL mode of List does, and what almost every app does, and thus the default value.
-* <tt>openItem</tt>. Opens the clicked item, just as if it had been clicked outside of the action mode. This is what the native Gmail app does.
-
+The sample application includes one activity to illustrate each of these methods.
 
 Libraries used
 --------------------
 
-* The library includes some code (mainly XML dimension resources) extracted from the ActionBarSherlock library.
-* Badges are implemented using the android-viewbadger library by Jeff Gilfelt.
-* The sample app uses the ActionBarSherlock library by Jake Wharton.
+* [ActionBarSherlock][1] by Jake Wharton.
+* [android-viewbadger][5] by Jeff Gilfelt.
 
 Developed By
 --------------------
@@ -168,3 +154,4 @@ License
  [2]: https://raw.github.com/ManuelPeinado/RefreshActionItem/master/art/readme_pic.png
  [3]: https://github.com/ManuelPeinado/RefreshActionItem/tree/master/sample
  [4]: https://github.com/TimotheeJeannin/ProviGen
+ [5]: https://github.com/jgilfelt/android-viewbadger

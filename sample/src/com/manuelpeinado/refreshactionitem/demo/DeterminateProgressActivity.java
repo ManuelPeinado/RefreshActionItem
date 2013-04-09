@@ -38,9 +38,21 @@ public class DeterminateProgressActivity extends SherlockListActivity implements
         setContentView(R.layout.activity_determinate_progress);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getSupportMenuInflater().inflate(R.menu.refresh, menu);
+        MenuItem item = menu.findItem(R.id.refresh_button);
+        mRefreshActionItem = (RefreshActionItem) item.getActionView();
+        mRefreshActionItem.setMenuItem(item);
+        mRefreshActionItem.setMax(100);
+        mRefreshActionItem.setRefreshActionListener(this);
+        loadData();
+        return true;
+    }
 
     private void loadData() {
-        mRefreshActionItem.setDisplayMode(RefreshActionItem.DETERMINATE);
+        mRefreshActionItem.showProgress(true);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -54,7 +66,7 @@ public class DeterminateProgressActivity extends SherlockListActivity implements
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mRefreshActionItem.setDisplayMode(RefreshActionItem.BUTTON);
+                        mRefreshActionItem.showProgress(false);
                         String[] items = generateRandomItemList();
                         setListAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, items));
                     }
@@ -70,18 +82,6 @@ public class DeterminateProgressActivity extends SherlockListActivity implements
             result[i] = Integer.toString(r.nextInt(1000));
         }
         return result;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportMenuInflater().inflate(R.menu.refresh, menu);
-        MenuItem item = menu.findItem(R.id.refresh_button);
-        mRefreshActionItem = (RefreshActionItem) item.getActionView();
-        mRefreshActionItem.setMenuItem(item);
-        mRefreshActionItem.setMax(100);
-        mRefreshActionItem.setRefreshActionListener(this);
-        loadData();
-        return true;
     }
     
     @Override
@@ -102,10 +102,10 @@ public class DeterminateProgressActivity extends SherlockListActivity implements
     }
 
     public void setWheelStyle(View view) {
-        mRefreshActionItem.setDeterminateIndicatorStyle(RefreshActionItem.WHEEL);
+        mRefreshActionItem.setProgressBarStyle(RefreshActionItem.WHEEL);
     }
 
     public void setPieStyle(View view) {
-        mRefreshActionItem.setDeterminateIndicatorStyle(RefreshActionItem.PIE);
+        mRefreshActionItem.setProgressBarStyle(RefreshActionItem.PIE);
     }
 }

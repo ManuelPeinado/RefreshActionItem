@@ -4,7 +4,6 @@
     <string name="app_name">RefreshActionItem sample</string>
     <string name="activity_title_determinate_progress">Determinate progress</string>
     <string name="activity_title_indeterminate_progress">Indeterminate progress</string>
-    <string name="activity_title_no_button">No button</string>
     <string name="activity_title_styled">Styled</string>
     <string name="activity_title_badge">Badges</string>
     <string name="action_settings">Settings</string>

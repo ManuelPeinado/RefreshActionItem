@@ -40,9 +40,22 @@ public class StyledActivity extends SherlockListActivity implements RefreshActio
         setContentView(R.layout.activity_styled);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getSupportMenuInflater().inflate(R.menu.save, menu);
+        MenuItem item = menu.findItem(R.id.save_button);
+        mSaveButton = (RefreshActionItem) item.getActionView();
+        mSaveButton.setMenuItem(item);
+        mSaveButton.setMax(100);
+        mSaveButton.setRefreshActionListener(this);
+        String[] items = generateRandomItemList();
+        setListAdapter(new ArrayAdapter<String>(getApplicationContext(), R.layout.simple_list_item, android.R.id.text1, items));
+        return true;
+    }
 
     private void saveData() {
-        mSaveButton.setDisplayMode(RefreshActionItem.DETERMINATE);
+        mSaveButton.showProgress(true);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -56,7 +69,7 @@ public class StyledActivity extends SherlockListActivity implements RefreshActio
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mSaveButton.setDisplayMode(RefreshActionItem.BUTTON);
+                        mSaveButton.showProgress(false);
                         Toast.makeText(getApplicationContext(), "Your data has been saved", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -71,19 +84,6 @@ public class StyledActivity extends SherlockListActivity implements RefreshActio
             result[i] = Integer.toString(r.nextInt(1000));
         }
         return result;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportMenuInflater().inflate(R.menu.save, menu);
-        MenuItem item = menu.findItem(R.id.save_button);
-        mSaveButton = (RefreshActionItem) item.getActionView();
-        mSaveButton.setMenuItem(item);
-        mSaveButton.setMax(100);
-        mSaveButton.setRefreshActionListener(this);
-        String[] items = generateRandomItemList();
-        setListAdapter(new ArrayAdapter<String>(getApplicationContext(), R.layout.simple_list_item, android.R.id.text1, items));
-        return true;
     }
     
     @Override
@@ -104,11 +104,11 @@ public class StyledActivity extends SherlockListActivity implements RefreshActio
     }
 
     public void setWheelStyle(View view) {
-        mSaveButton.setDeterminateIndicatorStyle(RefreshActionItem.WHEEL);
+        mSaveButton.setProgressBarStyle(RefreshActionItem.WHEEL);
     }
 
     public void setPieStyle(View view) {
-        mSaveButton.setDeterminateIndicatorStyle(RefreshActionItem.PIE);
+        mSaveButton.setProgressBarStyle(RefreshActionItem.PIE);
     }
     
     public void showBadge(View view) {

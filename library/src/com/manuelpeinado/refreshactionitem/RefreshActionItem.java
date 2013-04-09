@@ -35,46 +35,47 @@ import com.actionbarsherlock.view.MenuItem;
 import com.readystatesoftware.viewbadger.BadgeView;
 
 /**
- * An action bar item implementing a common pattern: initially a refresh button is shown,
- * and when the button is clicked a background operation begins and the button turns into
- * a progress indicator until the operation ends, at which point the button is restored to
- * its initial state.
- * <p>The progress indicator can be determinate or indeterminate. If the determinate mode is 
- * used, it is possible to choose between two styles: "wheel" and "pie". 
- * <p>It is also possible to have the refresh button be invisible initially, which makes this
- * action item behave like a replacement for the built-in indeterminate action bar progress
- * indicator (with the benefit that with this action item the progress can be determinate).
- * <p>The action item also supports adding a small badge that indicates that there is 
- * new data available.
+ * An action bar item implementing a common pattern: initially a refresh button
+ * is shown, and when the button is clicked a background operation begins and
+ * the button turns into a progress indicator until the operation ends, at which
+ * point the button is restored to its initial state.
+ * <p>
+ * The progress indicator can be determinate or indeterminate. If the
+ * determinate mode is used, it is possible to choose between two styles:
+ * "wheel" and "pie".
+ * <p>
+ * It is also possible to have the refresh button be invisible initially, which
+ * makes this action item behave like a replacement for the built-in
+ * indeterminate action bar progress indicator (with the benefit that with this
+ * action item the progress can be determinate).
+ * <p>
+ * The action item also supports adding a small badge that indicates that there
+ * is new data available.
  */
 public class RefreshActionItem extends FrameLayout implements OnClickListener, OnLongClickListener {
-    
-    // Display modes
-    public static final int BUTTON = 0;
-    public static final int PROGRESS = 1;
-    public static final int INDETERMINATE = 2;
-    public static final int HIDDEN = 3;
     // Determinate progress indicator styles
     public static final int WHEEL = ProgressIndicator.STYLE_WHEEL;
     public static final int PIE = ProgressIndicator.STYLE_PIE;
-    
+    public static final int INDETERMINATE = 2;
+
     private ImageView mRefreshButton;
     private ProgressBar mProgressIndicatorIndeterminate;
-    private ProgressIndicator mProgressIndicatorDeterminate;
-    private int mMax = 100;
-    private int mProgress;
-    private int mDisplayMode = BUTTON;
+    private ProgressIndicator mProgressIndicator;
     private RefreshActionListener mRefreshButtonListener;
     private BadgeView mBadge;
     private int mBadgeBackgroundColor = -1;
     private int mBadgeTextStyle;
     private int mBadgePosition;
     private MenuItem mMenuItem;
-    
+    private boolean mShowingProgress;
+    private int mMax = 100;
+    private int mProgress = 0;
+    private int mProgressBarStyle = WHEEL;
+
     public interface RefreshActionListener {
         void onRefreshButtonClick(RefreshActionItem sender);
     }
-    
+
     public RefreshActionItem(Context context) {
         this(context, null);
     }
@@ -82,70 +83,72 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     public RefreshActionItem(Context context, AttributeSet attrs) {
         this(context, attrs, R.attr.refreshActionItemStyle);
     }
-    
+
     @SuppressWarnings("deprecation")
     public RefreshActionItem(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.rai__action_item, this);
-        mRefreshButton = (ImageView)findViewById(R.id.refresh_button);
+        mRefreshButton = (ImageView) findViewById(R.id.refresh_button);
         mRefreshButton.setOnClickListener(this);
         mRefreshButton.setOnLongClickListener(this);
-        mProgressIndicatorIndeterminate = (ProgressBar)findViewById(R.id.indeterminate_progress_indicator);
-        mProgressIndicatorDeterminate = (ProgressIndicator)findViewById(R.id.determinate_progress_indicator);
+        mProgressIndicatorIndeterminate = (ProgressBar) findViewById(R.id.indeterminate_progress_indicator);
+        mProgressIndicator = (ProgressIndicator) findViewById(R.id.determinate_progress_indicator);
         updateChildrenVisibility();
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RefreshActionItem, 
-                                                      defStyle, R.style.Widget_RefreshActionItem_Dark);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RefreshActionItem, defStyle, R.style.Widget_RefreshActionItem_Dark);
         int N = a.getIndexCount();
         for (int i = 0; i < N; ++i) {
             int attr = a.getIndex(i);
             switch (attr) {
-                case R.styleable.RefreshActionItem_refreshActionItemIcon:
-                    Drawable refreshButtonIcon = a.getDrawable(R.styleable.RefreshActionItem_refreshActionItemIcon);
-                    mRefreshButton.setImageDrawable(refreshButtonIcon);
-                    break;
-                case R.styleable.RefreshActionItem_progressIndicatorForegroundColor:
-                    int color = a.getColor(R.styleable.RefreshActionItem_progressIndicatorForegroundColor, 0);
-                    mProgressIndicatorDeterminate.setForegroundColor(color);
-                    break;
-                case R.styleable.RefreshActionItem_progressIndicatorBackgroundColor:
-                    color = a.getColor(R.styleable.RefreshActionItem_progressIndicatorBackgroundColor, 0);
-                    mProgressIndicatorDeterminate.setBackgroundColor(color);
-                    break;
-                case R.styleable.RefreshActionItem_refreshActionItemBackground:
-                    Drawable drawable = a.getDrawable(R.styleable.RefreshActionItem_refreshActionItemBackground);
-                    mRefreshButton.setBackgroundDrawable(drawable);
-                    break;
-                case R.styleable.RefreshActionItem_badgeBackgroundColor:
-                    mBadgeBackgroundColor = a.getColor(R.styleable.RefreshActionItem_badgeBackgroundColor, -1);
-                    break;
-                case R.styleable.RefreshActionItem_badgeTextAppearance:
-                    mBadgeTextStyle = a.getResourceId(R.styleable.RefreshActionItem_badgeTextAppearance, 0);
-                    break;
-                case R.styleable.RefreshActionItem_badgePosition:
-                    mBadgePosition = a.getInt(R.styleable.RefreshActionItem_badgePosition, 0);
-                    break;
+            case R.styleable.RefreshActionItem_refreshActionItemIcon:
+                Drawable refreshButtonIcon = a.getDrawable(R.styleable.RefreshActionItem_refreshActionItemIcon);
+                mRefreshButton.setImageDrawable(refreshButtonIcon);
+                break;
+            case R.styleable.RefreshActionItem_progressIndicatorForegroundColor:
+                int color = a.getColor(R.styleable.RefreshActionItem_progressIndicatorForegroundColor, 0);
+                mProgressIndicator.setForegroundColor(color);
+                break;
+            case R.styleable.RefreshActionItem_progressIndicatorBackgroundColor:
+                color = a.getColor(R.styleable.RefreshActionItem_progressIndicatorBackgroundColor, 0);
+                mProgressIndicator.setBackgroundColor(color);
+                break;
+            case R.styleable.RefreshActionItem_refreshActionItemBackground:
+                Drawable drawable = a.getDrawable(R.styleable.RefreshActionItem_refreshActionItemBackground);
+                mRefreshButton.setBackgroundDrawable(drawable);
+                break;
+            case R.styleable.RefreshActionItem_badgeBackgroundColor:
+                mBadgeBackgroundColor = a.getColor(R.styleable.RefreshActionItem_badgeBackgroundColor, -1);
+                break;
+            case R.styleable.RefreshActionItem_badgeTextAppearance:
+                mBadgeTextStyle = a.getResourceId(R.styleable.RefreshActionItem_badgeTextAppearance, 0);
+                break;
+            case R.styleable.RefreshActionItem_badgePosition:
+                mBadgePosition = a.getInt(R.styleable.RefreshActionItem_badgePosition, 0);
+                break;
             }
-        }        
+        }
         a.recycle();
     }
-    
+
     public void setRefreshActionListener(RefreshActionListener listener) {
         this.mRefreshButtonListener = listener;
     }
-    
+
     public void setMenuItem(MenuItem menuItem) {
         this.mMenuItem = menuItem;
         if (menuItem.getIcon() != null) {
             mRefreshButton.setImageDrawable(mMenuItem.getIcon());
         }
     }
-    
+
     /**
-     * Adds an exclamation icon to the refresh button. This is intended to suggest
-     * the user that new data is available.
-     * <p>The badge is only shown in the {@link BUTTON} display mode
-     * <p>If the display mode is not <tt>BUTTON</tt>, nothing is done.
+     * Adds an exclamation icon to the refresh button. This is intended to
+     * suggest the user that new data is available.
+     * <p>
+     * The badge is only shown in the {@link BUTTON} display mode
+     * <p>
+     * If the display mode is not <tt>BUTTON</tt>, nothing is done.
+     * 
      * @see #showBadge(String)
      */
     public void showBadge() {
@@ -153,12 +156,17 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     }
 
     /**
-     * Adds a badge icon with a give text to the refresh button. This is intended to suggest
-     * the user that new data is available, including how many items
-     * <p>The badge is only shown in the {@link BUTTON} display mode
-     * <p>If the display mode is not <tt>BUTTON</tt>, nothing is done.
-     * @param text Text that is drawn inside the badge icon
-     * @see #showBadge() 
+     * Adds a badge icon with a give text to the refresh button. This is
+     * intended to suggest the user that new data is available, including how
+     * many items
+     * <p>
+     * The badge is only shown in the {@link BUTTON} display mode
+     * <p>
+     * If the display mode is not <tt>BUTTON</tt>, nothing is done.
+     * 
+     * @param text
+     *            Text that is drawn inside the badge icon
+     * @see #showBadge()
      */
     public void showBadge(String text) {
         hideBadge();
@@ -171,17 +179,20 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
             mBadge.setBadgeBackgroundColor(mBadgeBackgroundColor);
         }
         mBadge.setText(text);
-        if (mDisplayMode == BUTTON) {
-            // Otherwise the badge won't be shown until be return to BUTTON mode
+        if (mProgress != -1) {
+            // Otherwise the badge won't be shown until we stop showing progress
             mBadge.show(true);
         }
     }
-    
+
     /**
      * Hides the badge associated to this action item.
-     * <p>If the display mode is not <tt>BUTTON</tt> or the badge is not visible, nothing is done.
+     * <p>
+     * If the display mode is not <tt>BUTTON</tt> or the badge is not visible,
+     * nothing is done.
+     * 
      * @see #showBadge()
-     * @see #showBadge(String) 
+     * @see #showBadge(String)
      * @see #isBadgeVisible()
      */
     public void hideBadge() {
@@ -191,11 +202,12 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
         mBadge.hide(true);
         mBadge = null;
     }
-    
+
     /**
      * Returns whether this action item has a visible badge.
+     * 
      * @see #showBadge()
-     * @see #showBadge(String) 
+     * @see #showBadge(String)
      * @see #hideBadge()
      */
     public boolean isBadgeVisible() {
@@ -203,75 +215,28 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     }
 
     private void updateChildrenVisibility() {
-        switch (mDisplayMode) {
-        case BUTTON:
+        if (!mShowingProgress) {
             mRefreshButton.setVisibility(View.VISIBLE);
             mProgressIndicatorIndeterminate.setVisibility(View.GONE);
-            mProgressIndicatorDeterminate.setVisibility(View.GONE);
-            break;
-        case INDETERMINATE:
-            mRefreshButton.setVisibility(View.GONE);
-            mProgressIndicatorIndeterminate.setVisibility(View.VISIBLE);
-            mProgressIndicatorDeterminate.setVisibility(View.GONE);
-            updateProgressIndicatorValue();
-            break;
-        case PROGRESS:
-            mRefreshButton.setVisibility(View.GONE);
-            mProgressIndicatorIndeterminate.setVisibility(View.GONE);
-            mProgressIndicatorDeterminate.setVisibility(View.VISIBLE);
-            updateProgressIndicatorValue();
-            break;
-        }
-    }
-
-    
-    /**
-     * Calls {@link #setDisplayMode(int, boolean) passing <tt>false</tt> as the second parameter 
-     */
-    public void setDisplayMode(int mode) {
-        setDisplayMode(mode, false);
-    }
-    
-    /**
-     * Change the display mode of this progress bar. Supported modes are "refresh button",
-     * "determinate progress" and "indeterminate progress"
-     * @param mode One of {@link RefreshActionItem#BUTTON}, {@link RefreshActionItem#PROGRESS} or {@link RefreshActionItem#INDETERMINATE}
-     */
-    public void setDisplayMode(int mode, boolean resetProgress) {
-        if (mBadge != null) {
-            if (mode != BUTTON) {
-                // Hide badge temporarily until we return to BUTTON mode 
-                mBadge.hide(false);
-            }
-            else {
-                // If badge was hidden temporarily we restore it back to visible 
-                mBadge.show(false);
-            }
-        }
-        if (resetProgress) {
-            setProgress(0);
-        }
-        if (mDisplayMode == mode) {
+            mProgressIndicator.setVisibility(View.GONE);
             return;
         }
-        mDisplayMode = mode;
-        setVisibility(mode == HIDDEN ? GONE : VISIBLE);
-        if (mode != HIDDEN) {
-            updateChildrenVisibility();
+        if (mProgressBarStyle == INDETERMINATE) {
+            mRefreshButton.setVisibility(View.GONE);
+            mProgressIndicatorIndeterminate.setVisibility(View.VISIBLE);
+            mProgressIndicator.setVisibility(View.GONE);
+            updateProgressIndicatorValue();
+            return;
         }
-    }
-
-
-    /**
-     * Return the display mode of this progress bar 
-     * @return One of {@link DisplayMode#BUTTON}, {@link DisplayMode#PROGRESS} or {@link DisplayMode#INDETERMINATE}
-     */
-    public int getDisplayMode() {
-        return mDisplayMode;
+        mRefreshButton.setVisibility(View.GONE);
+        mProgressIndicatorIndeterminate.setVisibility(View.GONE);
+        mProgressIndicator.setVisibility(View.VISIBLE);
+        updateProgressIndicatorValue();
     }
 
     /**
      * Return the upper limit of this progress bar's range.
+     * 
      * @return a positive integer
      * @see #setMax(int)
      * @see #getProgress()
@@ -279,15 +244,39 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     public synchronized int getMax() {
         return mMax;
     }
-    
+
     /**
-     * Set the current progress to the specified value. If the progress bar is not in 
-     * determinate mode the view is not changed.
-     * @param progress the new progress, between 0 and {@link #getMax()}
+     * Changes the state of the action item between the modes "showing refresh button" and "showing progress"
+     * @param show
+     */
+    public void showProgress(boolean show) {
+        if (show == mShowingProgress) {
+            return;
+        }
+        if (mBadge != null) {
+            if (show) {
+                // Hide badge temporarily until we stop showing progress
+                mBadge.hide(false);
+            } else {
+                // If badge was hidden temporarily we restore it back to visible
+                mBadge.show(false);
+            }
+        }
+        setProgress(0);
+        mShowingProgress = show;
+        updateChildrenVisibility();
+    }
+
+    /**
+     * Set the current progress to the specified value. If the progress bar is
+     * not in determinate mode the view is not changed.
+     * 
+     * @param progress
+     *            the new progress, between 0 and {@link #getMax()}
      * @see #setDisplayMode(DisplayMode)
      * @see #getMode()
      * @see #getProgress()
-     * @see #incrementProgressBy(int) 
+     * @see #incrementProgressBy(int)
      */
     public synchronized void setProgress(int progress) {
         if (progress < 0) {
@@ -301,15 +290,17 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
             updateProgressIndicatorValue();
         }
     }
-    
+
     private void updateProgressIndicatorValue() {
-        mProgressIndicatorDeterminate.setValue(mProgress / (float)mMax);
+        mProgressIndicator.setValue(mProgress / (float) mMax);
     }
 
     /**
      * Increase the progress bar's progress by the specified amount.
-     * @param diff the amount by which the progress must be increased
-     * @see #setProgress(int) 
+     * 
+     * @param diff
+     *            the amount by which the progress must be increased
+     * @see #setProgress(int)
      */
     public synchronized final void incrementProgressBy(int diff) {
         setProgress(mProgress + diff);
@@ -317,9 +308,11 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     
     /**
      * Set the range of the progress bar to 0...<tt>max</tt>
-     * @param max the upper range of this progress bar
+     * 
+     * @param max
+     *            the upper range of this progress bar
      * @see #getMax()
-     * @see #setProgress(int) 
+     * @see #setProgress(int)
      */
     public synchronized void setMax(int max) {
         if (max < 0) {
@@ -334,21 +327,33 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
         }
     }
 
-    public void setDeterminateIndicatorStyle(int style) {
-        mProgressIndicatorDeterminate.setStyle(style);
+    /**
+     * This has no effect if the action item has indeterminate progress
+     * @param style One of {@link RefreshActionItem#WHEEL}, {@link RefreshActionItem#PIE}
+     *              or {@link RefreshActionItem#PIE}
+     */
+    public void setProgressBarStyle(int style) {
+        if (style == mProgressBarStyle) {
+            return;
+        }
+        mProgressBarStyle  = style;
+        if (style != INDETERMINATE) {
+            mProgressIndicator.setStyle(style);
+        }
+        updateChildrenVisibility();
     }
-    
-    public void getDeterminateIndicatorStyle() {
-        mProgressIndicatorDeterminate.getStyle();
+
+    public void getProgressIndicatorStyle() {
+        mProgressIndicator.getStyle();
     }
-    
+
     @Override
     public void onClick(View v) {
         if (mRefreshButtonListener != null) {
             mRefreshButtonListener.onRefreshButtonClick(this);
         }
     }
-    
+
     @Override
     public boolean onLongClick(View v) {
         if (mMenuItem == null || TextUtils.isEmpty(mMenuItem.getTitle())) {
@@ -365,8 +370,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
         final int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
         Toast cheatSheet = Toast.makeText(context, mMenuItem.getTitle(), Toast.LENGTH_SHORT);
         if (midy < displayFrame.height()) {
-            cheatSheet.setGravity(Gravity.TOP | Gravity.RIGHT,
-                                  screenWidth - screenPos[0] - width / 2, height);
+            cheatSheet.setGravity(Gravity.TOP | Gravity.RIGHT, screenWidth - screenPos[0] - width / 2, height);
         } else {
             cheatSheet.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, height);
         }

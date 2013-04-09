@@ -38,9 +38,21 @@ public class IndeterminateProgressActivity extends SherlockListActivity implemen
         setContentView(R.layout.activity_indeterminate_progress);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getSupportMenuInflater().inflate(R.menu.refresh, menu);
+        MenuItem item = menu.findItem(R.id.refresh_button);
+        mRefreshActionItem = (RefreshActionItem)item.getActionView();
+        mRefreshActionItem.setMenuItem(item);
+        mRefreshActionItem.setProgressBarStyle(RefreshActionItem.INDETERMINATE);
+        mRefreshActionItem.setRefreshActionListener(this);
+        loadData();
+        return true;
+    }
 
     private void loadData() {
-        mRefreshActionItem.setDisplayMode(RefreshActionItem.INDETERMINATE);
+        mRefreshActionItem.showProgress(true);
         new Thread(new Runnable() {
             @Override public void run() {
                 try {
@@ -49,7 +61,7 @@ public class IndeterminateProgressActivity extends SherlockListActivity implemen
                 }
                 runOnUiThread(new Runnable() {
                     @Override public void run() {
-                        mRefreshActionItem.setDisplayMode(RefreshActionItem.BUTTON);
+                        mRefreshActionItem.showProgress(false);
                         String[] items = generateRandomItemList();
                         setListAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, items ));
                     }
@@ -67,16 +79,6 @@ public class IndeterminateProgressActivity extends SherlockListActivity implemen
         return result;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportMenuInflater().inflate(R.menu.refresh, menu);
-        MenuItem item = menu.findItem(R.id.refresh_button);
-        mRefreshActionItem = (RefreshActionItem)item.getActionView();
-        mRefreshActionItem.setMenuItem(item);
-        mRefreshActionItem.setRefreshActionListener(this);
-        loadData();
-        return true;
-    }
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
