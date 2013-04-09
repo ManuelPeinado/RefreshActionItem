@@ -66,7 +66,7 @@ Then, configure the action in the <tt>onCreateOptionsMenu</tt> method of your <t
         return true;
     }
 
-Use the <tt>setRefreshActionListener</tt> method to register your callback that will be invoked when the refresh button is clicked. Start your background process from this callback and change the display mode of the action item so that it shows a progress indicator:
+The <tt>setRefreshActionListener</tt> method registers a callback that will be invoked when the refresh button is clicked. Start your background process from this callback and change the display mode of the action item so that it shows a progress indicator:
 
 
     @Override
