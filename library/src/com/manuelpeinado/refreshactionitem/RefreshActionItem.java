@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.actionbarsherlock.view.MenuItem;
 import com.readystatesoftware.viewbadger.BadgeView;
 
 /**
@@ -50,7 +51,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     
     // Display modes
     public static final int BUTTON = 0;
-    public static final int DETERMINATE = 1;
+    public static final int PROGRESS = 1;
     public static final int INDETERMINATE = 2;
     public static final int HIDDEN = 3;
     // Determinate progress indicator styles
@@ -68,7 +69,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     private int mBadgeBackgroundColor = -1;
     private int mBadgeTextStyle;
     private int mBadgePosition;
-    private CharSequence mMenuItemTitle;
+    private MenuItem mMenuItem;
     
     public interface RefreshActionListener {
         void onRefreshButtonClick(RefreshActionItem sender);
@@ -133,8 +134,11 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
         this.mRefreshButtonListener = listener;
     }
     
-    public void setMenuItemTitle(CharSequence title) {
-        this.mMenuItemTitle = title;
+    public void setMenuItem(MenuItem menuItem) {
+        this.mMenuItem = menuItem;
+        if (menuItem.getIcon() != null) {
+            mRefreshButton.setImageDrawable(mMenuItem.getIcon());
+        }
     }
     
     /**
@@ -211,7 +215,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
             mProgressIndicatorDeterminate.setVisibility(View.GONE);
             updateProgressIndicatorValue();
             break;
-        case DETERMINATE:
+        case PROGRESS:
             mRefreshButton.setVisibility(View.GONE);
             mProgressIndicatorIndeterminate.setVisibility(View.GONE);
             mProgressIndicatorDeterminate.setVisibility(View.VISIBLE);
@@ -231,7 +235,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     /**
      * Change the display mode of this progress bar. Supported modes are "refresh button",
      * "determinate progress" and "indeterminate progress"
-     * @param mode One of {@link RefreshActionItem#BUTTON}, {@link RefreshActionItem#DETERMINATE} or {@link RefreshActionItem#INDETERMINATE}
+     * @param mode One of {@link RefreshActionItem#BUTTON}, {@link RefreshActionItem#PROGRESS} or {@link RefreshActionItem#INDETERMINATE}
      */
     public void setDisplayMode(int mode, boolean resetProgress) {
         if (mBadge != null) {
@@ -260,7 +264,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
 
     /**
      * Return the display mode of this progress bar 
-     * @return One of {@link DisplayMode#BUTTON}, {@link DisplayMode#DETERMINATE} or {@link DisplayMode#INDETERMINATE}
+     * @return One of {@link DisplayMode#BUTTON}, {@link DisplayMode#PROGRESS} or {@link DisplayMode#INDETERMINATE}
      */
     public int getDisplayMode() {
         return mDisplayMode;
@@ -347,7 +351,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     
     @Override
     public boolean onLongClick(View v) {
-        if (mMenuItemTitle == null || TextUtils.isEmpty(mMenuItemTitle)) {
+        if (mMenuItem == null || TextUtils.isEmpty(mMenuItem.getTitle())) {
             return true;
         }
         final int[] screenPos = new int[2];
@@ -359,7 +363,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
         final int height = getHeight();
         final int midy = screenPos[1] + height / 2;
         final int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
-        Toast cheatSheet = Toast.makeText(context, mMenuItemTitle, Toast.LENGTH_SHORT);
+        Toast cheatSheet = Toast.makeText(context, mMenuItem.getTitle(), Toast.LENGTH_SHORT);
         if (midy < displayFrame.height()) {
             cheatSheet.setGravity(Gravity.TOP | Gravity.RIGHT,
                                   screenWidth - screenPos[0] - width / 2, height);

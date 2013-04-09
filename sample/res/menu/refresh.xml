@@ -2,8 +2,8 @@
 
     <item
         android:id="@+id/refresh_button"
+        android:actionViewClass="com.manuelpeinado.refreshactionitem.RefreshActionItem"
         android:showAsAction="always"
-        android:title="@string/action_refresh"
-        android:actionViewClass="com.manuelpeinado.refreshactionitem.RefreshActionItem"/>
-    
+        android:title="@string/action_refresh"/>
+
 </menu>

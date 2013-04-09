@@ -77,7 +77,7 @@ public class DeterminateProgressActivity extends SherlockListActivity implements
         getSupportMenuInflater().inflate(R.menu.refresh, menu);
         MenuItem item = menu.findItem(R.id.refresh_button);
         mRefreshActionItem = (RefreshActionItem) item.getActionView();
-        mRefreshActionItem.setMenuItemTitle(item.getTitle());
+        mRefreshActionItem.setMenuItem(item);
         mRefreshActionItem.setMax(100);
         mRefreshActionItem.setRefreshActionListener(this);
         loadData();
