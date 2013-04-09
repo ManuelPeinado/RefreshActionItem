@@ -79,7 +79,7 @@ From your background task, call the action item's <tt>setProgress(int)</tt> meth
 
     mRefreshActionItem.setProgress(progress);
     
-If the progress of your background task cannot be easily measured you might prefer to use an indeterminate progress indicator. Just pass <tt>RefreshActionItem.PROGRESS</tt> to the <tt>setDisplayMode()</tt> instead.
+If the progress of your background task cannot be easily measured you might prefer to use an indeterminate progress indicator. Just pass <tt>RefreshActionItem.INDETERMINATE</tt> to <tt>setDisplayMode()</tt>.
 
 Finally, when the background task is complete restore the action item to its original state:
 
