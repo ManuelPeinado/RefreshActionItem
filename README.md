@@ -32,53 +32,64 @@ If you’re using Eclipse with the ADT plugin you can include RefreshActionItem 
 
 If you use maven to build your Android project you can simply add a dependency for this library.
 
-    <dependency>
-        <groupId>com.github.manuelpeinado.refreshactionitem</groupId>
-        <artifactId>library</artifactId>
-        <version>1.0.0</version>
-        <type>apklib</type>
-    </dependency>
+```xml
+ <dependency>
+     <groupId>com.github.manuelpeinado.refreshactionitem</groupId>
+     <artifactId>library</artifactId>
+     <version>1.0.0</version>
+     <type>apklib</type>
+ </dependency>
+```
 
 Usage
 -----
 
 Add an element for the refresh action to your XML menu:
 
-    <item
-        android:id="@+id/refresh_button"          
-        android:actionViewClass=
-            "com.manuelpeinado.refreshactionitem.RefreshActionItem"
-        android:showAsAction="always"
-        android:title="@string/action_refresh"/>
+```xml
+<item
+    android:id="@+id/refresh_button"          
+    android:actionViewClass=
+        "com.manuelpeinado.refreshactionitem.RefreshActionItem"
+    android:showAsAction="always"
+    android:title="@string/action_refresh"/>
+```
 
 Then, configure the action in the <tt>onCreateOptionsMenu</tt> method of your <tt>SherlockActivity</tt>-derived activity:
 
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportMenuInflater().inflate(R.menu.main, menu);
-        MenuItem item = menu.findItem(R.id.refresh_button);
-        mRefreshActionItem = (RefreshActionItem) item.getActionView();
-        mRefreshActionItem.setMenuItem(item);
-        mRefreshActionItem.setMax(100);
-        mRefreshActionItem.setRefreshActionListener(this);
-        return true;
-    }
+```java
+@Override public boolean onCreateOptionsMenu(Menu menu) {
+    getSupportMenuInflater().inflate(R.menu.main, menu);
+    MenuItem item = menu.findItem(R.id.refresh_button);
+    mRefreshActionItem = (RefreshActionItem) item.getActionView();
+    mRefreshActionItem.setMenuItem(item);
+    mRefreshActionItem.setMax(100);
+    mRefreshActionItem.setRefreshActionListener(this);
+    return true;
+}
+```
 
 The <tt>setRefreshActionListener</tt> method registers a callback that will be invoked when the refresh button is clicked. Start your background process from this callback and invoke <tt>showProgress(true)</tt> on the action item so that it turns into a progress indicator:
 
-
-    @Override
-    public void onRefreshButtonClick(RefreshActionItem sender) {
-        mRefreshActionItem.showProgress(true);
-        startBackgroundTask();
-    }
+```java
+@Override
+public void onRefreshButtonClick(RefreshActionItem sender) {
+    mRefreshActionItem.showProgress(true);
+    startBackgroundTask();
+}
+```
 
 From your background task, call the action item's <tt>setProgress(int)</tt> method each time some progress is made:
 
-    mRefreshActionItem.setProgress(progress);
+```java
+mRefreshActionItem.setProgress(progress);
+```
     
 Finally, when the background task is complete restore the action item to its original state:
 
-    mRefreshActionItem.showProgress(false);
+```java
+mRefreshActionItem.showProgress(false);
+```
 
 ### Progress indicator types
 
@@ -90,7 +101,9 @@ Also, if the progress of your background task cannot be easily measured you migh
 
 Sometimes it is useful to give the user a visual hint suggesting that there is new data to be loaded. You can easily achieve this by adding a badge to your action item:
 
-    mRefreshActionItem.showBadge();
+```java
+mRefreshActionItem.showBadge();
+```
 
 The badge shows an exclamation mark by default, but you can specify an alternative text if you desire.
 
@@ -101,22 +114,23 @@ You can easily customize the appearance of your RefreshActionItems. Just define 
 
 The following snippet is extracted from the accompanying sample application. To see it in action open the "Styling" demo in the main menu.
 
-    <style name="AppTheme" parent="Theme.Sherlock.Light">
-        <item name="refreshActionItemStyle">@style/CustomRefreshActionItem</item>
-    </style>
+```xml
+<style name="AppTheme" parent="Theme.Sherlock.Light">
+    <item name="refreshActionItemStyle">@style/CustomRefreshActionItem</item>
+</style>
 
-    <style name="CustomRefreshActionItem" parent="Widget.RefreshActionItem.Light">
-        <item name="progressIndicatorType">pie</item>
-        <item name="badgeBackgroundColor">#A4F4</item>
-        <item name="badgeTextStyle">@style/BadgeText</item>
-        <item name="badgePosition">bottomLeft</item>
-    </style>
+<style name="CustomRefreshActionItem" parent="Widget.RefreshActionItem.Light">
+    <item name="progressIndicatorType">pie</item>
+    <item name="badgeBackgroundColor">#A4F4</item>
+    <item name="badgeTextStyle">@style/BadgeText</item>
+    <item name="badgePosition">bottomLeft</item>
+</style>
 
-    <style name="BadgeText">
-        <item name="android:textSize">14dp</item>
-        <item name="android:textColor">#7000</item>
-    </style>
-
+<style name="BadgeText">
+    <item name="android:textSize">14dp</item>
+    <item name="android:textColor">#7000</item>
+</style>
+```
 
 Libraries used
 --------------------
