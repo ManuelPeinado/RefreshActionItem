@@ -6,7 +6,7 @@
     <style name="Widget.RefreshActionItem">
         <item name="refreshActionItemBackground">?attr/actionBarItemBackground</item>
         <item name="badgeBackgroundColor">#CF00</item>
-        <item name="badgeTextAppearance">@style/Widget.RefreshActionItem.TextAppearance</item>
+        <item name="badgeTextStyle">@style/Widget.RefreshActionItem.TextAppearance</item>
         <item name="badgePosition">topRight</item>
     </style>
 

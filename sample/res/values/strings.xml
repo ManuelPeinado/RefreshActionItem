@@ -4,7 +4,7 @@
     <string name="app_name">RefreshActionItem sample</string>
     <string name="activity_title_determinate_progress">Determinate progress</string>
     <string name="activity_title_indeterminate_progress">Indeterminate progress</string>
-    <string name="activity_title_styled">Styled</string>
+    <string name="activity_title_styled_in_theme">Styled in XML theme</string>
     <string name="activity_title_badge">Badges</string>
     <string name="action_settings">Settings</string>
     <string name="action_refresh">Refresh</string>

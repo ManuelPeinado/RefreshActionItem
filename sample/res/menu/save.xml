@@ -4,6 +4,7 @@
         android:id="@+id/save_button"
         android:showAsAction="always"
         android:title="@string/action_save"
+        android:icon="@drawable/ic_content_save"
         android:actionViewClass="com.manuelpeinado.refreshactionitem.RefreshActionItem"/>
     
 </menu>

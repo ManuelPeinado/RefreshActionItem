@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:orientation="vertical"
-    tools:context=".DeterminateProgressActivity" >
+    tools:context=".BasicUsageActivity" >
 
     <ListView
         android:id="@android:id/list"

@@ -15,6 +15,6 @@
         <item name="actionBarStyle">@style/Widget.ActionBar.Styled</item>
         <item name="android:actionBarItemBackground">@drawable/styled_item_background</item>
         <item name="actionBarItemBackground">@drawable/styled_item_background</item>
-        </style>
+    </style>
 
 </resources>

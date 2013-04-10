@@ -81,14 +81,11 @@ Finally, when the background task is complete restore the action item to its ori
 
     mRefreshActionItem.showProgress(false);
 
-### Progress bar styles
+### Progress indicator types
 
-By the default the action item shows the amount of progress using a wheel (or doughnut if you prefer). There is an additional style, the "pie", which you can activate by calling <tt>setProgressBarStyle(RefreshActionItem.PIE</tt> on your action item.
+By default the action item shows the amount of progress using a wheel. There is an additional style, "pie", which you can activate by calling <tt>setProgressIndicatorType(ProgressIndicatorType.PIE</tt> on your action item.
 
-Also, if the progress of your background task cannot be easily measured you might prefer to use an indeterminate progress indicator. To achieve this just call <tt>setProgressBarStyle(RefreshActionItem.INDETERMINATE)</tt> on your action item.
-
-Progress bar styles can also be specified using XML themes (see the *Customization* section below).
-
+Also, if the progress of your background task cannot be easily measured you might prefer to use an indeterminate progress indicator. To achieve this just pass <tt>setProgressIndicatorType(ProgressIndicatorType.INDETERMINATE)</tt> to your action item.
 
 ### Badges
 
@@ -101,12 +98,9 @@ The badge shows an exclamation mark by default, but you can specify an alternati
 
 Customization
 ---------------------
-There are two ways you can customize the appearance of your action item:
+You can easily customize the appearance of your RefreshActionItems. Just define a <tt>refreshActionItemStyle</tt> attribute in your theme and make it reference a custom style where you can specify new values for any of the multiple attributes recognized by the library.
 
- 1. **Theme XML**. Define a <tt>refreshActionItemStyle</tt> attribute in your theme and make it reference a custom style where you can customize any of the multiple attributes supported by the library.
- 2. **Object methods**. Use the getters and setters methods provided by the library directly from your Java code.
-
-The sample application includes one activity to illustrate each of these methods.
+See the source of the "Styled" activity in the accompanying sample application for a complete working example of this.
 
 Libraries used
 --------------------

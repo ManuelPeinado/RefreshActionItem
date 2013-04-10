@@ -4,17 +4,51 @@
     <attr name="refreshActionItemStyle" format="reference" />
 
     <declare-styleable name="RefreshActionItem">
+        <!-- Background selector for the refresh button. By default it uses
+             the same background of all other action bar buttons, which is
+             what you'll need 99% of the time -->
         <attr name="refreshActionItemBackground" format="reference|color" />
+        <!-- Icon that is shown when the action item is not in progress mode.
+             By default it is a refresh icon. Use this attribute in your theme
+             if you want to change the icon of ALL your action items, otherwise
+             it is much simpler to use the "android:icon" attribute in the menu
+             element for your action item (just like you would do for any other
+             action item)  -->
         <attr name="refreshActionItemIcon" format="reference" />
+        <!-- Background color for the progress indicator bar. The default value
+             has been carefully tuned to look like the other action bar items, so
+             you probably don't wan to change this value unless you want your 
+             progress indicator to stand out (in a negative way). Please note that
+             this has no effect on the indeterminate progress indicator  -->
         <attr name="progressIndicatorBackgroundColor" format="color" />
+        <!-- Foreground color for the progress indicator bar. The default value
+             has been carefully tuned to look like the other action bar items, so
+             you probably don't wan to change this value unless you want your 
+             progress indicator to stand out (in a negative way). Please note that
+             this has no effect on the indeterminate progress indicator  -->
         <attr name="progressIndicatorForegroundColor" format="color" />
-        <attr name="progressIndicatorStyle">
+        <!-- The progress indicator type for newly created items. The three supported
+             types are "wheel", "pie", and "indeterminate". By default the wheel type
+             is used. Changing it to "pie" is basically a aesthetical decision, whereas
+             the determinate type is different in that it does not show a specific 
+             progress value, it just spins to give the impression that the app is working. 
+             Use this attribute in your theme if you want to change the type of 
+             ALL your action items, otherwise it is much simpler to just invoke
+             the setProgressIndicatorType() method on your action item once it's been
+             inflated  -->
+        <attr name="progressIndicatorType">
             <flag name="wheel" value="0" />
             <flag name="pie" value="1" />
             <flag name="indeterminate" value="2" />
         </attr>
+        <!-- Use this attribute to customize the background color of your action item
+             badges. By default it is a semitransparent red -->
         <attr name="badgeBackgroundColor" format="color" />
-        <attr name="badgeTextAppearance" format="reference" />
+        <!-- Use this attribute to customize the text styles of your action item
+             badges. By default it uses a white, 12dp, bold typeface -->
+        <attr name="badgeTextStyle" format="reference" />
+        <!-- Use this attribute to customize the position of your action item
+             badges. The default value is "topRight" -->
         <attr name="badgePosition">
             <flag name="topLeft" value="1" />
             <flag name="topRight" value="2" />

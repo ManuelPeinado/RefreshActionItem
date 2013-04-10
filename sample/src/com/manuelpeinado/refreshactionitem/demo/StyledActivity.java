@@ -26,7 +26,6 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.manuelpeinado.refreshactionitem.demo.R;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem.RefreshActionListener;
 
@@ -103,14 +102,6 @@ public class StyledActivity extends SherlockListActivity implements RefreshActio
         saveData();
     }
 
-    public void setWheelStyle(View view) {
-        mSaveButton.setProgressBarStyle(RefreshActionItem.WHEEL);
-    }
-
-    public void setPieStyle(View view) {
-        mSaveButton.setProgressBarStyle(RefreshActionItem.PIE);
-    }
-    
     public void showBadge(View view) {
         if (mSaveButton.isBadgeVisible()) {
             mSaveButton.hideBadge();

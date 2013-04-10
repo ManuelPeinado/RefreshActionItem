@@ -19,7 +19,6 @@ import java.util.Random;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 
 import com.actionbarsherlock.app.SherlockListActivity;
@@ -28,14 +27,14 @@ import com.actionbarsherlock.view.MenuItem;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem.RefreshActionListener;
 
-public class DeterminateProgressActivity extends SherlockListActivity implements RefreshActionListener {
+public class BasicUsageActivity extends SherlockListActivity implements RefreshActionListener {
     private RefreshActionItem mRefreshActionItem;
     private Random r = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_determinate_progress);
+        setContentView(R.layout.activity_basic_usage);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     
@@ -99,13 +98,5 @@ public class DeterminateProgressActivity extends SherlockListActivity implements
     @Override
     public void onRefreshButtonClick(RefreshActionItem sender) {
         loadData();
-    }
-
-    public void setWheelStyle(View view) {
-        mRefreshActionItem.setProgressBarStyle(RefreshActionItem.WHEEL);
-    }
-
-    public void setPieStyle(View view) {
-        mRefreshActionItem.setProgressBarStyle(RefreshActionItem.PIE);
     }
 }

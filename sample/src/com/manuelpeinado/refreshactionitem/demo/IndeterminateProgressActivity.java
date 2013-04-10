@@ -24,7 +24,7 @@ import android.widget.ArrayAdapter;
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.manuelpeinado.refreshactionitem.demo.R;
+import com.manuelpeinado.refreshactionitem.ProgressIndicatorType;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem;
 import com.manuelpeinado.refreshactionitem.RefreshActionItem.RefreshActionListener;
 
@@ -45,7 +45,7 @@ public class IndeterminateProgressActivity extends SherlockListActivity implemen
         MenuItem item = menu.findItem(R.id.refresh_button);
         mRefreshActionItem = (RefreshActionItem)item.getActionView();
         mRefreshActionItem.setMenuItem(item);
-        mRefreshActionItem.setProgressBarStyle(RefreshActionItem.INDETERMINATE);
+        mRefreshActionItem.setProgressIndicatorType(ProgressIndicatorType.INDETERMINATE);
         mRefreshActionItem.setRefreshActionListener(this);
         loadData();
         return true;

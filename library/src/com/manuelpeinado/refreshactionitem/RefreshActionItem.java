@@ -53,11 +53,6 @@ import com.readystatesoftware.viewbadger.BadgeView;
  * is new data available.
  */
 public class RefreshActionItem extends FrameLayout implements OnClickListener, OnLongClickListener {
-    // Determinate progress indicator styles
-    public static final int WHEEL = ProgressIndicator.STYLE_WHEEL;
-    public static final int PIE = ProgressIndicator.STYLE_PIE;
-    public static final int INDETERMINATE = 2;
-
     private ImageView mRefreshButton;
     private ProgressBar mProgressIndicatorIndeterminate;
     private ProgressIndicator mProgressIndicator;
@@ -70,7 +65,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     private boolean mShowingProgress;
     private int mMax = 100;
     private int mProgress = 0;
-    private int mProgressBarStyle = WHEEL;
+    private ProgressIndicatorType mProgressIndicatorType;
 
     public interface RefreshActionListener {
         void onRefreshButtonClick(RefreshActionItem sender);
@@ -100,30 +95,36 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
         for (int i = 0; i < N; ++i) {
             int attr = a.getIndex(i);
             switch (attr) {
+            case R.styleable.RefreshActionItem_progressIndicatorType:
+                mProgressIndicatorType = ProgressIndicatorType.values()[a.getInt(attr, 0)];
+                if (mProgressIndicatorType == ProgressIndicatorType.PIE) {
+                    mProgressIndicator.setPieStyle(true);
+                }
+                break;
             case R.styleable.RefreshActionItem_refreshActionItemIcon:
-                Drawable refreshButtonIcon = a.getDrawable(R.styleable.RefreshActionItem_refreshActionItemIcon);
+                Drawable refreshButtonIcon = a.getDrawable(attr);
                 mRefreshButton.setImageDrawable(refreshButtonIcon);
                 break;
             case R.styleable.RefreshActionItem_progressIndicatorForegroundColor:
-                int color = a.getColor(R.styleable.RefreshActionItem_progressIndicatorForegroundColor, 0);
+                int color = a.getColor(attr, 0);
                 mProgressIndicator.setForegroundColor(color);
                 break;
             case R.styleable.RefreshActionItem_progressIndicatorBackgroundColor:
-                color = a.getColor(R.styleable.RefreshActionItem_progressIndicatorBackgroundColor, 0);
+                color = a.getColor(attr, 0);
                 mProgressIndicator.setBackgroundColor(color);
                 break;
             case R.styleable.RefreshActionItem_refreshActionItemBackground:
-                Drawable drawable = a.getDrawable(R.styleable.RefreshActionItem_refreshActionItemBackground);
+                Drawable drawable = a.getDrawable(attr);
                 mRefreshButton.setBackgroundDrawable(drawable);
                 break;
             case R.styleable.RefreshActionItem_badgeBackgroundColor:
-                mBadgeBackgroundColor = a.getColor(R.styleable.RefreshActionItem_badgeBackgroundColor, -1);
+                mBadgeBackgroundColor = a.getColor(attr, -1);
                 break;
-            case R.styleable.RefreshActionItem_badgeTextAppearance:
-                mBadgeTextStyle = a.getResourceId(R.styleable.RefreshActionItem_badgeTextAppearance, 0);
+            case R.styleable.RefreshActionItem_badgeTextStyle:
+                mBadgeTextStyle = a.getResourceId(attr, 0);
                 break;
             case R.styleable.RefreshActionItem_badgePosition:
-                mBadgePosition = a.getInt(R.styleable.RefreshActionItem_badgePosition, 0);
+                mBadgePosition = a.getInt(attr, 0);
                 break;
             }
         }
@@ -205,7 +206,6 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
 
     /**
      * Returns whether this action item has a visible badge.
-     * 
      * @see #showBadge()
      * @see #showBadge(String)
      * @see #hideBadge()
@@ -213,7 +213,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     public boolean isBadgeVisible() {
         return mBadge != null;
     }
-
+    
     private void updateChildrenVisibility() {
         if (!mShowingProgress) {
             mRefreshButton.setVisibility(View.VISIBLE);
@@ -221,7 +221,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
             mProgressIndicator.setVisibility(View.GONE);
             return;
         }
-        if (mProgressBarStyle == INDETERMINATE) {
+        if (mProgressIndicatorType == ProgressIndicatorType.INDETERMINATE) {
             mRefreshButton.setVisibility(View.GONE);
             mProgressIndicatorIndeterminate.setVisibility(View.VISIBLE);
             mProgressIndicator.setVisibility(View.GONE);
@@ -329,22 +329,25 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
 
     /**
      * This has no effect if the action item has indeterminate progress
-     * @param style One of {@link RefreshActionItem#WHEEL}, {@link RefreshActionItem#PIE}
-     *              or {@link RefreshActionItem#PIE}
+     * @param style One of {@link ProgressIndicatorType#WHEEL}, {@link ProgressIndicatorType#PIE}
+     *              or {@link ProgressIndicatorType#INDETERMINATE}
      */
-    public void setProgressBarStyle(int style) {
-        if (style == mProgressBarStyle) {
+    public void setProgressIndicatorType(ProgressIndicatorType style) {
+        if (style == mProgressIndicatorType) {
             return;
         }
-        mProgressBarStyle  = style;
-        if (style != INDETERMINATE) {
-            mProgressIndicator.setStyle(style);
+        mProgressIndicatorType  = style;
+        if (style == ProgressIndicatorType.PIE) {
+            mProgressIndicator.setPieStyle(true);
+        }
+        else if (style == ProgressIndicatorType.WHEEL) {
+            mProgressIndicator.setPieStyle(false);
         }
         updateChildrenVisibility();
     }
 
-    public void getProgressIndicatorStyle() {
-        mProgressIndicator.getStyle();
+    public ProgressIndicatorType getProgressIndicatorType() {
+        return mProgressIndicatorType;
     }
 
     @Override

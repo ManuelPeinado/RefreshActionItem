@@ -23,14 +23,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DeterminateProgressActivity"
+            android:name=".BasicUsageActivity"
             android:label="@string/activity_title_determinate_progress" />
         <activity
             android:name=".IndeterminateProgressActivity"
             android:label="@string/activity_title_indeterminate_progress" />
         <activity
             android:name=".StyledActivity"
-            android:label="@string/activity_title_styled"
+            android:label="@string/activity_title_styled_in_theme"
             android:theme="@style/AppTheme.Light.Styled" />
         <activity
             android:name=".BadgeActivity"
