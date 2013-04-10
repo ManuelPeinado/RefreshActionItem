@@ -166,7 +166,7 @@ License
 
 
 
- [1]: http://actionbarshelock.com
+ [1]: http://actionbarsherlock.com
  [2]: https://raw.github.com/ManuelPeinado/RefreshActionItem/master/art/readme_pic.png
  [3]: https://github.com/ManuelPeinado/RefreshActionItem/tree/master/sample
  [4]: https://github.com/TimotheeJeannin/ProviGen
