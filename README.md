@@ -60,7 +60,6 @@ Then, configure the action in the <tt>onCreateOptionsMenu</tt> method of your <t
         mRefreshActionItem.setMenuItem(item);
         mRefreshActionItem.setMax(100);
         mRefreshActionItem.setRefreshActionListener(this);
-        loadData();
         return true;
     }
 
@@ -83,9 +82,9 @@ Finally, when the background task is complete restore the action item to its ori
 
 ### Progress indicator types
 
-By default the action item shows the amount of progress using a wheel. There is an additional style, "pie", which you can activate by calling <tt>setProgressIndicatorType(ProgressIndicatorType.PIE</tt> on your action item.
+By default the action item shows the amount of progress using a wheel. There is an additional style, "pie", which you can activate by calling <tt>setProgressIndicatorType(ProgressIndicatorType.PIE)</tt> on your action item.
 
-Also, if the progress of your background task cannot be easily measured you might prefer to use an indeterminate progress indicator. To achieve this just pass <tt>setProgressIndicatorType(ProgressIndicatorType.INDETERMINATE)</tt> to your action item.
+Also, if the progress of your background task cannot be easily measured you might prefer to use an indeterminate progress indicator. To achieve this just pass <tt>ProgressIndicatorType.INDETERMINATE</tt> to <tt>setProgressIndicatorType()</tt>.
 
 ### Badges
 
@@ -100,7 +99,7 @@ Customization
 ---------------------
 You can easily customize the appearance of your RefreshActionItems. Just define a <tt>refreshActionItemStyle</tt> attribute in your theme and make it reference a custom style where you specify new values for any of the multiple attributes recognized by the library.
 
-The following snippet is extracted from the accompanying sample application. You can see it in action in the "Styled" activity.
+The following snippet is extracted from the accompanying sample application. To see it in action open the "Styling" demo in the main menu.
 
     <style name="AppTheme" parent="Theme.Sherlock.Light">
         <item name="refreshActionItemStyle">@style/CustomRefreshActionItem</item>
