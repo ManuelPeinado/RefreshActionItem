@@ -73,7 +73,6 @@ public class StyledActivity extends SherlockListActivity implements RefreshActio
                     }
                 });
             }
-
         }).start();
     }
 

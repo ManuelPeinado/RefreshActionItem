@@ -24,7 +24,7 @@
         </activity>
         <activity
             android:name=".BasicUsageActivity"
-            android:label="@string/activity_title_determinate_progress" />
+            android:label="@string/activity_title_basic_usage" />
         <activity
             android:name=".IndeterminateProgressActivity"
             android:label="@string/activity_title_indeterminate_progress" />

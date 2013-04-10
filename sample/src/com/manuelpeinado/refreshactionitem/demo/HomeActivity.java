@@ -30,7 +30,7 @@ import com.manuelpeinado.refreshactionitem.demo.R;
 
 public class HomeActivity extends SherlockListActivity {
     private List<ActivityInfo> activitiesInfo = Arrays.asList(
-            new ActivityInfo(BasicUsageActivity.class, R.string.activity_title_determinate_progress),
+            new ActivityInfo(BasicUsageActivity.class, R.string.activity_title_basic_usage),
             new ActivityInfo(IndeterminateProgressActivity.class, R.string.activity_title_indeterminate_progress),
             new ActivityInfo(BadgeActivity.class, R.string.activity_title_badge),
             new ActivityInfo(StyledActivity.class, R.string.activity_title_styling));
