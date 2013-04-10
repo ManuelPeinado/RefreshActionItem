@@ -125,6 +125,11 @@ Libraries used
 * [ActionBarSherlock][1] by Jake Wharton.
 * [android-viewbadger][5] by Jeff Gilfelt.
 
+Credits
+-------
+
+* Cake launcher icon by [IconEden][6].
+
 Developed By
 --------------------
 
@@ -167,3 +172,4 @@ License
  [3]: https://github.com/ManuelPeinado/RefreshActionItem/tree/master/sample
  [4]: https://github.com/TimotheeJeannin/ProviGen
  [5]: https://github.com/jgilfelt/android-viewbadger
+ [6]: http://www.iconeden.com
