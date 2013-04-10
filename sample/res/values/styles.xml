@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Widget.RefreshActionItem.Light.Styled">
+    <style name="CustomRefreshActionItem" parent="Widget.RefreshActionItem.Light">
         <item name="progressIndicatorType">pie</item>
         <item name="badgeBackgroundColor">#A4F4</item>
-        <item name="badgeTextStyle">@style/Widget.RefreshActionItem.TextAppearance.Styled</item>
+        <item name="badgeTextStyle">@style/BadgeTextStyle</item>
         <item name="badgePosition">bottomLeft</item>
     </style>
 
-    <style name="Widget.RefreshActionItem.TextAppearance.Styled">
+    <style name="BadgeTextStyle">
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">#7000</item>
     </style>

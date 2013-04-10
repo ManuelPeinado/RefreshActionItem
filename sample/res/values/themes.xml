@@ -10,7 +10,7 @@
     </style>
 
     <style name="AppTheme.Light.Styled">
-        <item name="refreshActionItemStyle">@style/Widget.RefreshActionItem.Light.Styled</item>
+        <item name="refreshActionItemStyle">@style/CustomRefreshActionItem</item>
         <item name="android:actionBarStyle">@style/Widget.ActionBar.Styled</item>
         <item name="actionBarStyle">@style/Widget.ActionBar.Styled</item>
         <item name="android:actionBarItemBackground">@drawable/styled_item_background</item>

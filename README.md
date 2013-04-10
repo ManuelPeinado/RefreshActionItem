@@ -98,9 +98,26 @@ The badge shows an exclamation mark by default, but you can specify an alternati
 
 Customization
 ---------------------
-You can easily customize the appearance of your RefreshActionItems. Just define a <tt>refreshActionItemStyle</tt> attribute in your theme and make it reference a custom style where you can specify new values for any of the multiple attributes recognized by the library.
+You can easily customize the appearance of your RefreshActionItems. Just define a <tt>refreshActionItemStyle</tt> attribute in your theme and make it reference a custom style where you specify new values for any of the multiple attributes recognized by the library.
 
-See the source of the "Styled" activity in the accompanying sample application for a complete working example of this.
+The following snippet is extracted from the accompanying sample application. You can see it in action in the "Styled" activity.
+
+    <style name="AppTheme" parent="Theme.Sherlock.Light">
+        <item name="refreshActionItemStyle">@style/CustomRefreshActionItem</item>
+    </style>
+
+    <style name="CustomRefreshActionItem" parent="Widget.RefreshActionItem.Light">
+        <item name="progressIndicatorType">pie</item>
+        <item name="badgeBackgroundColor">#A4F4</item>
+        <item name="badgeTextStyle">@style/BadgeText</item>
+        <item name="badgePosition">bottomLeft</item>
+    </style>
+
+    <style name="BadgeText">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">#7000</item>
+    </style>
+
 
 Libraries used
 --------------------
