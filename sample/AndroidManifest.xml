@@ -30,7 +30,7 @@
             android:label="@string/activity_title_indeterminate_progress" />
         <activity
             android:name=".StyledActivity"
-            android:label="@string/activity_title_styled_in_theme"
+            android:label="@string/activity_title_styling"
             android:theme="@style/AppTheme.Light.Styled" />
         <activity
             android:name=".BadgeActivity"

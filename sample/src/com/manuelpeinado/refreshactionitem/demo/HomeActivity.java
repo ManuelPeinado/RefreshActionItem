@@ -33,7 +33,7 @@ public class HomeActivity extends SherlockListActivity {
             new ActivityInfo(BasicUsageActivity.class, R.string.activity_title_determinate_progress),
             new ActivityInfo(IndeterminateProgressActivity.class, R.string.activity_title_indeterminate_progress),
             new ActivityInfo(BadgeActivity.class, R.string.activity_title_badge),
-            new ActivityInfo(StyledActivity.class, R.string.activity_title_styled_in_theme));
+            new ActivityInfo(StyledActivity.class, R.string.activity_title_styling));
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
