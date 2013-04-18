@@ -11,9 +11,9 @@ The progress bar shows a magnitude which represents how far the operation has pr
  
 It is possible to add a small badge to the action item. This tells the user that there is new data available.
 
-This library requires [ActionBarSherlock][1], and is thus compatible with Android 2.x and newer.
+This library requires [ActionBarSherlock][1], and is thus compatible with Android 2.x and newer. If you don't need 2.x compatibility and thus use the native action bar, check out [this fork][2] of the library.
 
-![Example Image][2]
+![Example Image][3]
 
 Try out the sample application:
 
@@ -22,7 +22,7 @@ Try out the sample application:
        src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
 </a>
 
-Or browse the [source code][3] of the sample application for a complete example of use.
+Or browse the [source code][4] of the sample application for a complete example of use.
 
 
 Including in your project
@@ -181,8 +181,8 @@ License
 
 
  [1]: http://actionbarsherlock.com
- [2]: https://raw.github.com/ManuelPeinado/RefreshActionItem/master/art/readme_pic.png
- [3]: https://github.com/ManuelPeinado/RefreshActionItem/tree/master/sample
- [4]: https://github.com/TimotheeJeannin/ProviGen
+ [2]: https://github.com/ManuelPeinado/RefreshActionItem-Native
+ [3]: https://raw.github.com/ManuelPeinado/RefreshActionItem/master/art/readme_pic.png
+ [4]: https://github.com/ManuelPeinado/RefreshActionItem/tree/master/sample
  [5]: https://github.com/jgilfelt/android-viewbadger
  [6]: http://www.iconeden.com
