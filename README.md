@@ -143,6 +143,11 @@ Credits
 
 * Cake launcher icon by [IconEden][6].
 
+Who's using it
+--------------
+ 
+*Does your app use MultiChoiceAdapter? If you want to be featured on this list drop me a line.*
+
 Developed By
 --------------------
 
