@@ -12,7 +12,7 @@
     <groupId>com.github.manuelpeinado.refreshactionitem</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
 
     <name>Android-RefreshActionItem (Parent)</name>
     <description>Action bar item which acts both as refresh button and progress indicator</description>
