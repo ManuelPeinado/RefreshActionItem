@@ -21,6 +21,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +62,9 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
     private int mBadgeBackgroundColor = -1;
     private int mBadgeTextStyle;
     private int mBadgePosition;
+    // Please note that the state can be "showing progress" and "showing badge" simultaneously, in that case
+    // the badge remains hidden until we stop showing progress
+    private boolean mShowingBadge;
     private MenuItem mMenuItem;
     private boolean mShowingProgress;
     private int mMax = 100;
@@ -171,17 +175,20 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
      */
     public void showBadge(String text) {
         hideBadge();
-        mBadge = new BadgeView(getContext(), mRefreshButton);
-        mBadge.setBadgePosition(mBadgePosition);
-        if (mBadgeTextStyle != 0) {
-            mBadge.setTextAppearance(getContext(), mBadgeTextStyle);
+        if (mBadge == null) {
+            mBadge = new BadgeView(getContext(), mRefreshButton);
+            mBadge.setBadgePosition(mBadgePosition);
+            if (mBadgeTextStyle != 0) {
+                mBadge.setTextAppearance(getContext(), mBadgeTextStyle);
+            }
+            if (mBadgeBackgroundColor != -1) {
+                mBadge.setBadgeBackgroundColor(mBadgeBackgroundColor);
+            }
         }
-        if (mBadgeBackgroundColor != -1) {
-            mBadge.setBadgeBackgroundColor(mBadgeBackgroundColor);
-        }
+        mShowingBadge = true;
         mBadge.setText(text);
-        if (mProgress != -1) {
-            // Otherwise the badge won't be shown until we stop showing progress
+        if (!mShowingProgress) {
+            // Otherwise the badge will be shown as soon as we stop showing progress
             mBadge.show(true);
         }
     }
@@ -197,11 +204,14 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
      * @see #isBadgeVisible()
      */
     public void hideBadge() {
-        if (mBadge == null) {
+        if (mBadge == null || !mShowingBadge) {
             return;
         }
-        mBadge.hide(true);
-        mBadge = null;
+        mShowingBadge = false;
+        if (!mShowingProgress) {
+            // If showing progress the badge is already hidden
+            mBadge.hide(true);
+        }
     }
 
     /**
@@ -211,7 +221,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
      * @see #hideBadge()
      */
     public boolean isBadgeVisible() {
-        return mBadge != null;
+        return mBadge != null && mShowingBadge;
     }
     
     private void updateChildrenVisibility() {
@@ -253,7 +263,7 @@ public class RefreshActionItem extends FrameLayout implements OnClickListener, O
         if (show == mShowingProgress) {
             return;
         }
-        if (mBadge != null) {
+        if (isBadgeVisible()) {
             if (show) {
                 // Hide badge temporarily until we stop showing progress
                 mBadge.hide(false);
