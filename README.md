@@ -36,7 +36,7 @@ If you use maven to build your Android project you can simply add a dependency f
  <dependency>
      <groupId>com.github.manuelpeinado.refreshactionitem</groupId>
      <artifactId>library</artifactId>
-     <version>1.0.1</version>
+     <version>1.0.2</version>
      <type>apklib</type>
  </dependency>
 ```
