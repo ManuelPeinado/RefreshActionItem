@@ -146,7 +146,8 @@ Credits
 Who's using it
 --------------
 
-* [Signos Fodas][7]. With this app you can follow all horoscope signs, updated daily in real time on your Android (Portuguese only).
+* [The New York Times][7]. Experience the world’s finest journalism with The New York Times app for Android.
+* [Signos Fodas][8]. With this app you can follow all horoscope signs, updated daily in real time on your Android (Portuguese only).
 
 *Does your app use RefreshActionItem? If you want to be featured on this list drop me a line.*
 
@@ -193,4 +194,5 @@ License
  [4]: https://github.com/ManuelPeinado/RefreshActionItem/tree/master/sample
  [5]: https://github.com/jgilfelt/android-viewbadger
  [6]: http://www.iconeden.com
- [7]: https://play.google.com/store/apps/details?id=com.contralabs.app.horoscoposignos
+ [7]: https://play.google.com/store/apps/details?id=com.nytimes.android
+ [8]: https://play.google.com/store/apps/details?id=com.contralabs.app.horoscoposignos
