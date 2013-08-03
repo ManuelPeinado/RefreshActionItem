@@ -11,9 +11,9 @@ The progress bar shows a magnitude which represents how far the operation has pr
  
 It is possible to add a small badge to the action item. This tells the user that there is new data available.
 
-This library requires [ActionBarSherlock][1], and is thus compatible with Android 2.x and newer. If you don't need 2.x compatibility and thus use the native action bar, check out [this fork][2] of the library.
+This library requires [ActionBarSherlock][1], and is thus compatible with Android 2.x and newer. If you use the new ActionBarCompat instead, you can use [this fork][2]. Finally, if you don't need 2.x compatibility and thus use the native action bar, there is [another fork][3] that you can use.
 
-![Example Image][3]
+![Example Image][4]
 
 Try out the sample application:
 
@@ -22,7 +22,7 @@ Try out the sample application:
        src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
 </a>
 
-Or browse the [source code][4] of the sample application for a complete example of use.
+Or browse the [source code][5] of the sample application for a complete example of use.
 
 
 Including in your project
@@ -136,18 +136,18 @@ Libraries used
 --------------------
 
 * [ActionBarSherlock][1] by Jake Wharton.
-* [android-viewbadger][5] by Jeff Gilfelt.
+* [android-viewbadger][6] by Jeff Gilfelt.
 
 Credits
 -------
-
-* Cake launcher icon by [IconEden][6].
+* Thanks to Fede Fernández for [adapting the library][2] to use ActionBarCompat.
+* Cake launcher icon by [IconEden][7].
 
 Who's using it
 --------------
 
-* [The New York Times][7]. Experience the world’s finest journalism with The New York Times app for Android.
-* [Signos Fodas][8]. With this app you can follow all horoscope signs, updated daily in real time on your Android (Portuguese only).
+* [The New York Times][8]. Experience the world’s finest journalism with The New York Times app for Android.
+* [Signos Fodas][9]. With this app you can follow all horoscope signs, updated daily in real time on your Android (Portuguese only).
 
 *Does your app use RefreshActionItem? If you want to be featured on this list drop me a line.*
 
@@ -189,10 +189,11 @@ License
 
 
  [1]: http://actionbarsherlock.com
- [2]: https://github.com/ManuelPeinado/RefreshActionItem-Native
- [3]: https://raw.github.com/ManuelPeinado/RefreshActionItem/master/art/readme_pic.png
- [4]: https://github.com/ManuelPeinado/RefreshActionItem/tree/master/sample
- [5]: https://github.com/jgilfelt/android-viewbadger
- [6]: http://www.iconeden.com
- [7]: https://play.google.com/store/apps/details?id=com.nytimes.android
- [8]: https://play.google.com/store/apps/details?id=com.contralabs.app.horoscoposignos
+ [2]: https://github.com/projectsexception/RefreshActionItem-ActionBarCompat
+ [3]: https://github.com/ManuelPeinado/RefreshActionItem-Native
+ [4]: https://raw.github.com/ManuelPeinado/RefreshActionItem/master/art/readme_pic.png
+ [5]: https://github.com/ManuelPeinado/RefreshActionItem/tree/master/sample
+ [6]: https://github.com/jgilfelt/android-viewbadger
+ [7]: http://www.iconeden.com
+ [8]: https://play.google.com/store/apps/details?id=com.nytimes.android
+ [9]: https://play.google.com/store/apps/details?id=com.contralabs.app.horoscoposignos
