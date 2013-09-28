@@ -26,3 +26,6 @@ pom.xml.*
 
 # Folder containing all the Google Play APKs
 apks
+library/build
+sample/build
+.gradle
