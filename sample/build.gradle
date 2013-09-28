@@ -10,8 +10,8 @@ dependencies {
 }
 
 android {
-    compileSdkVersion 16
-    buildToolsVersion "18.0.1"
+    compileSdkVersion 18
+    buildToolsVersion "18.1"
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
