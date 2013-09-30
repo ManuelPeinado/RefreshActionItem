@@ -147,7 +147,8 @@ Who's using it
 --------------
 
 * [The New York Times][8]. Experience the world’s finest journalism with The New York Times app for Android.
-* [Signos Fodas][9]. With this app you can follow all horoscope signs, updated daily in real time on your Android (Portuguese only).
+* [DevAppsDirect][9]. Developer Apps Direct is a large and growing collection of library demos.
+* [Signos Fodas][10]. With this app you can follow all horoscope signs, updated daily in real time on your Android (Portuguese only).
 
 *Does your app use RefreshActionItem? If you want to be featured on this list drop me a line.*
 
@@ -196,4 +197,5 @@ License
  [6]: https://github.com/jgilfelt/android-viewbadger
  [7]: http://www.iconeden.com
  [8]: https://play.google.com/store/apps/details?id=com.nytimes.android
- [9]: https://play.google.com/store/apps/details?id=com.contralabs.app.horoscoposignos
+ [9]: https://play.google.com/store/apps/details?id=com.inappsquared.devappsdirect
+ [10]: https://play.google.com/store/apps/details?id=com.contralabs.app.horoscoposignos
