@@ -5,7 +5,7 @@
 
     <artifactId>library</artifactId>
     <name>RefreshActionItem</name>
-    <packaging>apklib</packaging>
+    <packaging>aar</packaging>
 
     <parent>
         <groupId>com.github.manuelpeinado.refreshactionitem</groupId>
@@ -29,8 +29,7 @@
         <dependency>
           <groupId>com.actionbarsherlock</groupId>
           <artifactId>actionbarsherlock</artifactId>
-          <version>4.3.1</version>
-          <type>apklib</type>
+          <type>aar</type>
         </dependency>
     </dependencies>
 
